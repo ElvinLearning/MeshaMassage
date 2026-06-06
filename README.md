@@ -34,7 +34,6 @@ Plain HTML / CSS / JS — deployed via GitHub Pages. No build step needed.
 - [ ] Misha creates a Cal.com account — replace `YOUR-CAL-USERNAME` in `index.html` (~line 78) with her username
 - [ ] Add hero photo (replace `.hero-image-placeholder` in the HTML with an `<img>` tag)
 - [ ] Add Misha's headshot for the About section (replace `.about-image-placeholder`)
-- [ ] Confirm business name spelling: meeting notes say **Misha**, README originally said **Mesha** — verify with her
 - [ ] Add real pricing and session durations for each service
 - [ ] Add real location/address or neighborhood detail in footer
 
