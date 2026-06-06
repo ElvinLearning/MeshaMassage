@@ -1,6 +1,6 @@
 # Essential Massage by Misha
 
-Website for **Essential Massage by Misha** — a luxury therapeutic massage and body contouring practice based in Plainfield, IL.
+Website for **Essential Massage by Misha** — a luxury therapeutic massage and body contouring practice based in Bolingbrook, IL.
 
 **Live site:** https://elvinlearning.github.io/MeshaMassage
 
@@ -9,7 +9,7 @@ Website for **Essential Massage by Misha** — a luxury therapeutic massage and 
 ## About the Business
 
 - **Services:** Therapeutic massage + body contouring
-- **Location:** Plainfield, IL (private salon suite; storefront planned 2026)
+- **Location:** Bolingbrook, IL (private salon suite; storefront planned 2026)
 - **Target clients:** Adults 40–65 for massage; younger demographic for body contouring
 - **Vibe:** "Luxury healthcare" — not a generic salon, not a spa chain
 - **Booking:** Moving off Massage Book (25% cut) to Cal.com
