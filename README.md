@@ -1,6 +1,6 @@
-# Essential Massage by Misha
+# Essential Massage by Mesha
 
-Website for **Essential Massage by Misha** — a luxury therapeutic massage and body contouring practice based in Bolingbrook, IL.
+Website for **Essential Massage by Mesha** — a luxury therapeutic massage and body contouring practice based in Bolingbrook, IL.
 
 **Live site:** https://elvinlearning.github.io/MeshaMassage
 
