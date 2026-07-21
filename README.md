@@ -31,20 +31,25 @@ those hex values to restyle the whole site.
 
 ## Customizing the site (for Mesha)
 
-Everything that needs your real info is marked with a `TODO` comment in `index.html`.
-Search the file for **"TODO"** to find each one:
+Real business info — services, prices, address, phone, hours, reviews, and the
+booking link — was pulled from Mesha's [MassageBook page](https://www.massagebook.com/therapists/EssentialmassagebyMesha)
+and is already filled in. The only remaining placeholders are marked with a
+`TODO` comment in `index.html` — search the file for **"TODO"**:
 
-### Must-have before launch
-- [ ] Replace placeholder images (hero background + About photo) with your own — see the `img-placeholder` blocks and Unsplash URLs
-- [ ] Update service names, descriptions, and **prices** to match your real menu
-- [ ] Add your real **phone number** (in the Contact section)
-- [ ] Add your real **email address**
-- [ ] Add your real **street address** and confirm your **hours**
-- [ ] Point the "Book Now Online" button to your real booking link (Google Business "Book" button, Square Appointments, Calendly, etc.)
-- [ ] Rewrite the About bio in your own words + add your license/credentials
+### Already real ✅
+- Services & pricing (Swedish $120, Deep Tissue $130, Prenatal $170, Lymphatic Drainage $145, plus 30-min/90-min/2-hr/body sculpting)
+- Address: 619 E Boughton Rd, Suite 143, Bolingbrook, IL 60440
+- Phone: (331) 233-3613
+- Business hours
+- Verified 5-star reviews
+- Online booking button → MassageBook
+
+### Still needs Mesha's input
+- [ ] Replace placeholder images (hero background + About photo) with real photos
+- [ ] Add a real **email address** (wasn't listed publicly)
+- [ ] Add real **Instagram** and **Google Business Profile** links in the footer
 
 ### Nice to have
-- [ ] Swap the sample reviews for real ones from your Google Business Profile
-- [ ] Add your Instagram / Facebook / Google Business Profile links in the footer
+- [ ] Add Mesha's license # / credentials to the About section, if she'd like
 - [ ] Connect a custom domain (e.g. `essentialmassagebymesha.com`)
 - [ ] Add SEO meta tags for "massage near me Bolingbrook IL"
