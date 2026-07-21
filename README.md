@@ -1,6 +1,6 @@
 # Essential Massage by Mesha
 
-Website for **Essential Massage by Mesha** — a luxury therapeutic massage and body contouring practice based in Bolingbrook, IL.
+One-page website mockup for **Essential Massage by Mesha** — a warm, personalized massage therapy practice in Bolingbrook, IL.
 
 **Live site:** https://elvinlearning.github.io/MeshaMassage
 
@@ -8,42 +8,43 @@ Website for **Essential Massage by Mesha** — a luxury therapeutic massage and 
 
 ## About the Business
 
-- **Services:** Therapeutic massage + body contouring
-- **Location:** Bolingbrook, IL (private salon suite; storefront planned 2026)
-- **Target clients:** Adults 40–65 for massage; younger demographic for body contouring
-- **Vibe:** "Luxury healthcare" — not a generic salon, not a spa chain
-- **Booking:** Moving off Massage Book (25% cut) to Cal.com
+- **Services:** Massage therapy — Swedish, deep tissue, hot stone, prenatal
+- **Location:** Bolingbrook, IL (by appointment)
+- **Clientele:** Everyone — gender-inclusive, all ages and bodies welcome
+- **Vibe:** Warm, calm, clean spa aesthetic — soft neutrals, generous whitespace
 
 ---
 
 ## Tech Stack
 
-Plain HTML / CSS / JS — deployed via GitHub Pages. No build step needed.
+Single self-contained HTML file. **No build step** — just open `index.html` or host it as-is.
 
 | File | Purpose |
 |---|---|
-| `index.html` | Full single-page site |
-| `styles.css` | All styling (CSS custom properties, responsive) |
-| `script.js` | Nav scroll effect + fade-in animations |
+| `index.html` | The entire one-page site (Tailwind via CDN + inline styles) |
+
+Styling uses [Tailwind CSS](https://tailwindcss.com) loaded from the CDN. The spa color
+palette is defined in the `tailwind.config` block near the top of `index.html` — change
+those hex values to restyle the whole site.
 
 ---
 
-## TODO
+## Customizing the site (for Mesha)
+
+Everything that needs your real info is marked with a `TODO` comment in `index.html`.
+Search the file for **"TODO"** to find each one:
 
 ### Must-have before launch
-- [ ] Misha creates a Cal.com account — replace `YOUR-CAL-USERNAME` in `index.html` (~line 78) with her username
-- [ ] Add hero photo (replace `.hero-image-placeholder` in the HTML with an `<img>` tag)
-- [ ] Add Misha's headshot for the About section (replace `.about-image-placeholder`)
-- [ ] Add real pricing and session durations for each service
-- [ ] Add real location/address or neighborhood detail in footer
+- [ ] Replace placeholder images (hero background + About photo) with your own — see the `img-placeholder` blocks and Unsplash URLs
+- [ ] Update service names, descriptions, and **prices** to match your real menu
+- [ ] Add your real **phone number** (in the Contact section)
+- [ ] Add your real **email address**
+- [ ] Add your real **street address** and confirm your **hours**
+- [ ] Point the "Book Now Online" button to your real booking link (Google Business "Book" button, Square Appointments, Calendly, etc.)
+- [ ] Rewrite the About bio in your own words + add your license/credentials
 
 ### Nice to have
-- [ ] Embed Cal.com inline (instead of redirect link) using their embed script
-- [ ] Add a testimonials/reviews section (she has a loyal word-of-mouth base)
-- [ ] Connect a custom domain (e.g. `essentialmassagebymisha.com`) instead of GitHub Pages URL
-- [ ] Add Google Analytics or simple page-view tracking (but confirm ROI first — she was burned by a $600/mo marketing spend that got zero leads)
-- [ ] SEO meta tags for "massage near me Plainfield IL" — she gets most traffic from Google search
-
-### Future (post-storefront)
-- [ ] Waiting list signup form for when she's fully booked
-- [ ] Separate booking flows per therapist once she hires additional staff
+- [ ] Swap the sample reviews for real ones from your Google Business Profile
+- [ ] Add your Instagram / Facebook / Google Business Profile links in the footer
+- [ ] Connect a custom domain (e.g. `essentialmassagebymesha.com`)
+- [ ] Add SEO meta tags for "massage near me Bolingbrook IL"

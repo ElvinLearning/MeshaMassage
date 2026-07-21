@@ -3,155 +3,381 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Essential Massage by Misha — Luxury therapeutic massage and body contouring in Bolingbrook, IL. Book your session today." />
-  <title>Essential Massage by Misha | Bolingbrook, IL</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Essential Massage by Mesha — warm, personalized massage therapy in Bolingbrook, IL. Swedish, deep tissue, hot stone & prenatal. Book your session today." />
+  <title>Essential Massage by Mesha | Massage Therapy in Bolingbrook, IL</title>
+
+  <!-- ============================================================
+       BUILD NOTE (for Mesha / your web person):
+       This is a single-file mockup. No build step required — just
+       open index.html in a browser or host it as-is.
+       Search for "TODO" to find every spot that needs your real
+       info: photos, phone, email, Google Business link, booking URL.
+       ============================================================ -->
+
+  <!-- Tailwind via CDN (no build step). -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: soft serif + clean sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-</head>
-<body>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- NAV -->
-  <header class="nav">
-    <div class="nav-inner">
-      <a href="#" class="logo">Essential Massage <span>by Misha</span></a>
-      <nav>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#booking" class="btn-nav">Book Now</a>
+  <script>
+    // Spa color palette — tweak here to restyle the whole site.
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:     '#faf6f0', // page background
+            beige:     '#efe6da', // soft cards / sections
+            sage:      '#8a9a82', // primary calm green
+            'sage-dk': '#6f7f68', // darker sage for hover
+            terracotta:'#c67b5c', // warm accent
+            charcoal:  '#3d3a36', // body text
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans:  ['"Nunito Sans"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    /* Offset anchor targets so the sticky nav doesn't cover headings */
+    section[id] { scroll-margin-top: 84px; }
+    /* Placeholder image blocks — soft, labeled, easy to swap out */
+    .img-placeholder {
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 1.5rem;
+      color: #ffffff; font-weight: 600; letter-spacing: .02em;
+      background-size: cover; background-position: center;
+    }
+  </style>
+</head>
+
+<body class="font-sans bg-cream text-charcoal antialiased">
+
+  <!-- ================= STICKY NAV ================= -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-cream/90 backdrop-blur border-b border-beige">
+    <div class="max-w-6xl mx-auto px-5 h-[70px] flex items-center justify-between">
+      <a href="#top" class="font-serif text-xl sm:text-2xl text-sage-dk leading-none">
+        Essential Massage <span class="block text-xs tracking-[0.25em] uppercase text-terracotta font-sans font-semibold">by Mesha</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm font-semibold">
+        <a href="#services" class="hover:text-sage transition-colors">Services</a>
+        <a href="#about" class="hover:text-sage transition-colors">About</a>
+        <a href="#reviews" class="hover:text-sage transition-colors">Reviews</a>
+        <a href="#booking" class="hover:text-sage transition-colors">Contact</a>
       </nav>
+      <a href="#booking" class="rounded-full bg-sage hover:bg-sage-dk text-white text-sm font-semibold px-5 py-2.5 transition-colors shadow-sm">
+        Book Now
+      </a>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="overline">Bolingbrook, IL</p>
-      <h1>Massage That Works<br><em>As Hard As You Do</em></h1>
-      <p class="hero-sub">Therapeutic massage and body contouring rooted in healthcare — not just relaxation. Designed for adults who take their wellbeing seriously.</p>
-      <a href="#booking" class="btn-primary">Book Your Session</a>
+  <!-- ================= HERO ================= -->
+  <section id="top" class="relative min-h-[90vh] flex items-center pt-[70px]">
+    <!-- HERO BACKGROUND IMAGE PLACEHOLDER
+         TODO: swap this Unsplash link for Mesha's own calming photo.
+         Recommended: a warm, softly-lit treatment room or spa detail. -->
+    <div class="absolute inset-0 img-placeholder"
+         style="background-image:linear-gradient(rgba(61,58,54,.45),rgba(61,58,54,.45)), url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1600&q=80');">
     </div>
-    <div class="hero-image">
-      <div class="hero-image-placeholder"></div>
-    </div>
-  </section>
 
-  <!-- PHILOSOPHY STRIP -->
-  <section class="philosophy-strip">
-    <p>"Where luxury meets healthcare — because your body deserves both."</p>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="services" id="services">
-    <div class="section-inner">
-      <p class="overline">What We Offer</p>
-      <h2>Our Services</h2>
-      <div class="services-grid">
-
-        <div class="service-card">
-          <div class="service-icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M24 4C24 4 10 14 10 26a14 14 0 0 0 28 0C38 14 24 4 24 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-              <path d="M24 16v16M18 28l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3>Therapeutic Massage</h3>
-          <p>Targeted, results-driven massage therapy for adults who need real relief — from chronic tension, stress, and the wear of daily life. This isn't a luxury afterthought. It's essential care.</p>
-          <a href="#booking" class="btn-link">Book a Session &rarr;</a>
-        </div>
-
-        <div class="service-card featured">
-          <div class="service-icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="24" cy="24" rx="14" ry="18" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M14 20c3-2 6-3 10-3s7 1 10 3M14 28c3 2 6 3 10 3s7-1 10-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <h3>Body Contouring</h3>
-          <p>Non-invasive body contouring treatments that complement your wellness journey. Ideal for clients looking to refine their shape with a professional, clinical approach.</p>
-          <a href="#booking" class="btn-link">Book a Session &rarr;</a>
-        </div>
-
+    <div class="relative max-w-6xl mx-auto px-5 w-full">
+      <div class="max-w-2xl">
+        <p class="text-white/90 uppercase tracking-[0.3em] text-xs font-semibold mb-4">Bolingbrook, Illinois</p>
+        <h1 class="font-serif text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05] mb-6">
+          Rest, relief, and<br>a little bit of calm.
+        </h1>
+        <p class="text-white/90 text-lg sm:text-xl font-light max-w-xl mb-8">
+          Personalized therapeutic massage in a warm, welcoming space —
+          for every body. Take an hour that's just for you.
+        </p>
+        <a href="#booking"
+           class="inline-block rounded-full bg-terracotta hover:bg-[#b56b4d] text-white text-base font-semibold px-8 py-4 shadow-lg transition-colors">
+          Book Now
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="section-inner about-inner">
-      <div class="about-image">
-        <div class="about-image-placeholder"></div>
+  <!-- ================= SERVICES ================= -->
+  <section id="services" class="py-20 sm:py-28 bg-cream">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3">What We Offer</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk mb-4">Services &amp; Pricing</h2>
+        <p class="text-charcoal/70">
+          Every session is tailored to you. New to massage or not sure what you need?
+          Just ask — Mesha will help you choose.
+        </p>
       </div>
-      <div class="about-text">
-        <p class="overline">Meet Misha</p>
-        <h2>Healthcare-Centered.<br>Luxury-Delivered.</h2>
-        <p>Essential Massage by Misha exists in a space most people don't expect — the intersection of genuine therapeutic care and a luxury experience. Misha brings clinical skill and intentional attention to every session, out of her private suite in Bolingbrook.</p>
-        <p>With a loyal client base built on real results and word-of-mouth trust, Misha understands that when you choose a massage therapist, you're making a more personal decision than booking a haircut. She honors that with every appointment.</p>
-        <p>Currently seeing clients by appointment. Working toward a dedicated storefront in 2026.</p>
-        <a href="#booking" class="btn-primary">Book With Misha</a>
+
+      <div class="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+
+        <!-- Service Card: Swedish -->
+        <div class="bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col">
+          <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center mb-5 text-2xl">🌿</div>
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Swedish Massage</h3>
+          <p class="text-charcoal/70 text-sm leading-relaxed flex-1">
+            Gentle, flowing strokes to melt away everyday stress, ease light tension,
+            and leave you deeply relaxed.
+          </p>
+          <p class="mt-5 font-semibold text-sage-dk">
+            <span class="text-2xl">$85</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min</span>
+          </p>
+          <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
+        </div>
+
+        <!-- Service Card: Deep Tissue -->
+        <div class="bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col">
+          <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center mb-5 text-2xl">💪</div>
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Deep Tissue</h3>
+          <p class="text-charcoal/70 text-sm leading-relaxed flex-1">
+            Focused, firmer pressure that reaches chronic knots and tight muscles —
+            ideal for active bodies and desk-bound shoulders alike.
+          </p>
+          <p class="mt-5 font-semibold text-sage-dk">
+            <span class="text-2xl">$100</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min</span>
+          </p>
+          <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
+        </div>
+
+        <!-- Service Card: Hot Stone -->
+        <div class="bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col">
+          <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center mb-5 text-2xl">🔥</div>
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Hot Stone</h3>
+          <p class="text-charcoal/70 text-sm leading-relaxed flex-1">
+            Smooth, warmed stones paired with soothing massage to loosen tension
+            and bring a wave of full-body calm.
+          </p>
+          <p class="mt-5 font-semibold text-sage-dk">
+            <span class="text-2xl">$120</span> <span class="text-charcoal/50 text-sm font-normal">/ 75 min</span>
+          </p>
+          <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
+        </div>
+
+        <!-- Service Card: Prenatal -->
+        <div class="bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col">
+          <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center mb-5 text-2xl">🤰</div>
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Prenatal Massage</h3>
+          <p class="text-charcoal/70 text-sm leading-relaxed flex-1">
+            Safe, nurturing bodywork for expecting parents — relieving back, hip,
+            and leg discomfort with gentle, supported positioning.
+          </p>
+          <p class="mt-5 font-semibold text-sage-dk">
+            <span class="text-2xl">$95</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min</span>
+          </p>
+          <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
+        </div>
+
+      </div>
+      <!-- TODO: update service names, descriptions & prices to match Mesha's real menu. -->
+    </div>
+  </section>
+
+  <!-- ================= ABOUT MESHA ================= -->
+  <section id="about" class="py-20 sm:py-28 bg-beige">
+    <div class="max-w-6xl mx-auto px-5 grid gap-12 lg:grid-cols-2 items-center">
+
+      <!-- ABOUT PHOTO PLACEHOLDER
+           TODO: replace with a real, friendly photo of Mesha. -->
+      <div class="img-placeholder rounded-3xl aspect-[4/5] w-full max-w-md mx-auto shadow-md"
+           style="background-image:linear-gradient(rgba(138,154,130,.35),rgba(138,154,130,.35)), url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80');">
+        Photo of Mesha
+      </div>
+
+      <div>
+        <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3">Meet Your Therapist</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk mb-6">Hi, I'm Mesha.</h2>
+        <div class="space-y-4 text-charcoal/80 leading-relaxed">
+          <p>
+            I believe great massage is equal parts skill and genuine care. Every person who
+            walks through my door gets my full attention — no rushing, no scripts, just
+            bodywork shaped around what <em>you</em> need that day.
+          </p>
+          <p>
+            As a licensed massage therapist here in Bolingbrook, I welcome clients of every
+            age, body, and background. Whether you're recovering from a tough week, easing
+            chronic tension, or simply giving yourself a moment to breathe — you're in good hands.
+          </p>
+          <p>
+            My space is quiet, clean, and calm by design. Come as you are.
+          </p>
+        </div>
+        <a href="#booking"
+           class="inline-block mt-8 rounded-full bg-sage hover:bg-sage-dk text-white font-semibold px-7 py-3.5 transition-colors shadow-sm">
+          Book a Session
+        </a>
+        <!-- TODO: replace bio copy with Mesha's own words & credentials. -->
       </div>
     </div>
   </section>
 
-  <!-- WHY CHOOSE -->
-  <section class="why">
-    <div class="section-inner">
-      <p class="overline">Why Essential Massage</p>
-      <h2>Built Different</h2>
-      <div class="why-grid">
-        <div class="why-item">
-          <h4>Not a Network</h4>
-          <p>When you book with Misha, you're booking with Misha — not getting routed through a platform that suggests other therapists or sells your gift card dollars to the competition.</p>
+  <!-- ================= WHY CHOOSE US ================= -->
+  <section class="py-20 sm:py-28 bg-cream">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3">Why Essential Massage</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk">The Difference You'll Feel</h2>
+      </div>
+
+      <div class="grid gap-8 sm:grid-cols-3 text-center">
+        <div class="px-4">
+          <div class="w-14 h-14 rounded-full bg-sage/15 text-sage-dk mx-auto flex items-center justify-center text-2xl mb-5">✔️</div>
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Licensed &amp; Experienced</h3>
+          <p class="text-charcoal/70 text-sm leading-relaxed">
+            A fully licensed massage therapist you can trust — trained, insured, and
+            genuinely passionate about the work.
+          </p>
         </div>
-        <div class="why-item">
-          <h4>Healthcare Mindset</h4>
-          <p>Massage here is treated as a health service, not an add-on. Misha's approach is therapeutic first, with the level of care and discretion that reflects that.</p>
+        <div class="px-4">
+          <div class="w-14 h-14 rounded-full bg-sage/15 text-sage-dk mx-auto flex items-center justify-center text-2xl mb-5">🤝</div>
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Personalized Care</h3>
+          <p class="text-charcoal/70 text-sm leading-relaxed">
+            No two bodies are alike. Every session is customized to your goals,
+            comfort, and pressure preferences.
+          </p>
         </div>
-        <div class="why-item">
-          <h4>Private & Personal</h4>
-          <p>Operating out of a private suite means your experience is calm, focused, and entirely about you — no busy salon floor, no waiting room noise.</p>
-        </div>
-        <div class="why-item">
-          <h4>Real Results</h4>
-          <p>A client base built almost entirely on referrals and repeat visits. The results speak for themselves — and so do Misha's clients.</p>
+        <div class="px-4">
+          <div class="w-14 h-14 rounded-full bg-sage/15 text-sage-dk mx-auto flex items-center justify-center text-2xl mb-5">🕯️</div>
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Relaxing Environment</h3>
+          <p class="text-charcoal/70 text-sm leading-relaxed">
+            A serene, spotless, private space designed to help you fully unwind
+            from the moment you arrive.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BOOKING -->
-  <section class="booking" id="booking">
-    <div class="section-inner booking-inner">
-      <p class="overline">Schedule Your Visit</p>
-      <h2>Ready to Book?</h2>
-      <p class="booking-sub">Select a service, pick a time that works for you, and your intake form will arrive in your inbox automatically. No phone tag, no hassle.</p>
-      <!-- Cal.com embed — replace YOUR-CAL-USERNAME with Misha's Cal.com username -->
-      <div id="cal-booking">
-        <a href="https://cal.com/YOUR-CAL-USERNAME" target="_blank" class="btn-primary btn-large">View Available Times</a>
-        <p class="booking-note">You'll be taken to our secure booking page. Intake forms are sent automatically upon confirmation.</p>
+  <!-- ================= REVIEWS ================= -->
+  <section id="reviews" class="py-20 sm:py-28 bg-beige">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3">Kind Words</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk">What Clients Are Saying</h2>
+      </div>
+
+      <div class="grid gap-7 md:grid-cols-3">
+        <!-- Review cards — TODO: swap in real reviews from your Google Business Profile. -->
+        <figure class="bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige/60">
+          <div class="text-terracotta text-lg mb-3">★★★★★</div>
+          <blockquote class="text-charcoal/80 leading-relaxed italic">
+            "Best massage I've had in years. Mesha actually listened to what my back
+            needed and I walked out feeling brand new. Already booked my next visit."
+          </blockquote>
+          <figcaption class="mt-5 font-semibold text-sage-dk">— Jordan P.</figcaption>
+        </figure>
+
+        <figure class="bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige/60">
+          <div class="text-terracotta text-lg mb-3">★★★★★</div>
+          <blockquote class="text-charcoal/80 leading-relaxed italic">
+            "So calming and professional from start to finish. The space is beautiful
+            and I felt completely comfortable. Highly recommend to anyone."
+          </blockquote>
+          <figcaption class="mt-5 font-semibold text-sage-dk">— Alex R.</figcaption>
+        </figure>
+
+        <figure class="bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige/60">
+          <div class="text-terracotta text-lg mb-3">★★★★★</div>
+          <blockquote class="text-charcoal/80 leading-relaxed italic">
+            "I came in with a lot of tension from work and left feeling lighter than
+            I have in months. Mesha is truly gifted. Can't wait to go back."
+          </blockquote>
+          <figcaption class="mt-5 font-semibold text-sage-dk">— Sam T.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <p class="logo">Essential Massage <span>by Misha</span></p>
-        <p>Luxury healthcare massage &amp; body contouring.<br>Bolingbrook, IL</p>
+  <!-- ================= BOOKING / CONTACT ================= -->
+  <section id="booking" class="py-20 sm:py-28 bg-sage text-white">
+    <div class="max-w-4xl mx-auto px-5 text-center">
+      <p class="uppercase tracking-[0.25em] text-xs font-semibold text-white/80 mb-3">Ready When You Are</p>
+      <h2 class="font-serif text-4xl sm:text-5xl mb-5">Book Your Session</h2>
+      <p class="text-white/85 text-lg max-w-xl mx-auto mb-9">
+        Treat yourself to an hour of calm. Reach out to schedule, or book online —
+        I'll help you find the perfect time.
+      </p>
+
+      <!-- Primary booking button
+           TODO: point this to Mesha's real booking link (Google Business
+           "Book" button, Calendly, Square Appointments, etc.). -->
+      <a href="#"
+         class="inline-block rounded-full bg-terracotta hover:bg-[#b56b4d] text-white text-base font-semibold px-9 py-4 shadow-lg transition-colors mb-12">
+        Book Now Online
+      </a>
+
+      <!-- Contact details -->
+      <div class="grid gap-8 sm:grid-cols-3 text-left max-w-3xl mx-auto">
+        <div class="bg-white/10 rounded-2xl p-6">
+          <p class="uppercase tracking-widest text-xs font-semibold text-white/70 mb-2">Call or Text</p>
+          <!-- TODO: replace with Mesha's real phone number -->
+          <a href="tel:+16305551234" class="text-lg font-semibold hover:underline">(630) 555-1234</a>
+        </div>
+        <div class="bg-white/10 rounded-2xl p-6">
+          <p class="uppercase tracking-widest text-xs font-semibold text-white/70 mb-2">Email</p>
+          <!-- TODO: replace with Mesha's real email -->
+          <a href="mailto:hello@essentialmassagebymesha.com" class="text-lg font-semibold hover:underline break-words">hello@essentialmassagebymesha.com</a>
+        </div>
+        <div class="bg-white/10 rounded-2xl p-6">
+          <p class="uppercase tracking-widest text-xs font-semibold text-white/70 mb-2">Visit</p>
+          <!-- TODO: replace with Mesha's real street address -->
+          <p class="text-lg font-semibold leading-snug">Bolingbrook, IL 60440<br><span class="text-sm font-normal text-white/70">By appointment</span></p>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#booking">Book Now</a>
+
+      <!-- Hours -->
+      <div class="mt-10 text-white/85">
+        <p class="uppercase tracking-widest text-xs font-semibold text-white/70 mb-2">Hours</p>
+        <!-- TODO: confirm Mesha's real hours -->
+        <p>Mon–Fri: 9am – 7pm &nbsp;•&nbsp; Sat: 10am – 4pm &nbsp;•&nbsp; Sun: Closed</p>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Essential Massage by Misha. All rights reserved.</p>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-charcoal text-cream/80 py-14">
+    <div class="max-w-6xl mx-auto px-5 grid gap-10 sm:grid-cols-3">
+      <div>
+        <p class="font-serif text-2xl text-cream mb-1">Essential Massage</p>
+        <p class="uppercase tracking-[0.25em] text-xs text-terracotta font-semibold mb-4">by Mesha</p>
+        <p class="text-sm leading-relaxed text-cream/60">
+          Warm, personalized massage therapy in Bolingbrook, Illinois. For every body.
+        </p>
+      </div>
+
+      <div>
+        <p class="font-semibold text-cream mb-4">Quick Links</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#services" class="hover:text-terracotta transition-colors">Services</a></li>
+          <li><a href="#about" class="hover:text-terracotta transition-colors">About Mesha</a></li>
+          <li><a href="#reviews" class="hover:text-terracotta transition-colors">Reviews</a></li>
+          <li><a href="#booking" class="hover:text-terracotta transition-colors">Book / Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-semibold text-cream mb-4">Connect</p>
+        <ul class="space-y-2 text-sm">
+          <!-- TODO: add Mesha's real social & Google Business links -->
+          <li><a href="#" class="hover:text-terracotta transition-colors">Instagram</a></li>
+          <li><a href="#" class="hover:text-terracotta transition-colors">Facebook</a></li>
+          <li><a href="#" class="hover:text-terracotta transition-colors">Google Business Profile</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-5 mt-10 pt-6 border-t border-cream/10 text-xs text-cream/50 flex flex-col sm:flex-row justify-between gap-2">
+      <p>&copy; 2026 Essential Massage by Mesha. All rights reserved.</p>
+      <p>Bolingbrook, Illinois</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
