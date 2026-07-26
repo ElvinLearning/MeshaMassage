@@ -19,8 +19,13 @@
          Search "CAL.COM" to find the swap-in spot.
        - Payments / gift cards = Stripe placeholder.
          Search "STRIPE" to find the swap-in spot.
+       - Real photos + welcome video are now in /assets and placed
+         in the hero, About, a welcome-video band, and the booking
+         backdrop.
+       - Palette: soft grays, blues & purples (client request) — all
+         defined in the tailwind.config below.
        - Search "TODO" for the handful of things we still need
-         from Mesha (real photos, email address, social URLs).
+         from Mesha (email address, social URLs).
 
        Single file, no build step. Just open it or host it as-is.
        ============================================================ -->
@@ -39,12 +44,14 @@
       theme: {
         extend: {
           colors: {
-            cream:     '#faf6f0', // page background
-            beige:     '#efe6da', // soft cards / sections
-            sage:      '#8a9a82', // primary calm green
-            'sage-dk': '#6f7f68', // darker sage for hover
-            terracotta:'#c67b5c', // warm accent
-            charcoal:  '#3d3a36', // body text
+            // Soft grays, blues & purples — calm, spa-like palette.
+            // (Names kept from the original build so classes restyle site-wide.)
+            cream:     '#f6f7fb', // page background — cool off-white
+            beige:     '#e8eaf4', // soft cards / sections — pale lavender-gray
+            sage:      '#7d88b3', // primary — soft periwinkle blue
+            'sage-dk': '#5c67a0', // deeper periwinkle for hover
+            terracotta:'#9b86c4', // accent — soft muted purple
+            charcoal:  '#343a4d', // body text — cool slate
           },
           fontFamily: {
             serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
@@ -69,14 +76,14 @@
         transform: translate(-50%, -50%);
         will-change: transform;
       }
-      #cursor-dot  { width: 7px;  height: 7px;  background: #c67b5c; }
+      #cursor-dot  { width: 7px;  height: 7px;  background: #9b86c4; }
       #cursor-ring {
-        width: 38px; height: 38px; border: 1.5px solid rgba(138,154,130,.85);
+        width: 38px; height: 38px; border: 1.5px solid rgba(125,136,179,.85);
         transition: width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease;
       }
       body.cursor-hot #cursor-ring {
         width: 62px; height: 62px;
-        background: rgba(198,123,92,.16); border-color: rgba(198,123,92,.9);
+        background: rgba(155,134,196,.16); border-color: rgba(155,134,196,.9);
       }
     }
     /* Hide the fake cursor on touch devices */
@@ -100,24 +107,24 @@
     .tilt::after {
       content: ''; position: absolute; inset: 0; border-radius: inherit;
       background: radial-gradient(240px circle at var(--mx,50%) var(--my,50%),
-                  rgba(198,123,92,.13), transparent 65%);
+                  rgba(155,134,196,.13), transparent 65%);
       opacity: 0; transition: opacity .3s ease; pointer-events: none;
     }
     .tilt:hover::after { opacity: 1; }
-    .tilt:hover { box-shadow: 0 22px 45px -22px rgba(61,58,54,.42); }
+    .tilt:hover { box-shadow: 0 22px 45px -22px rgba(52,58,77,.42); }
 
     /* ---------- Animated underline for nav links ---------- */
     .navlink { position: relative; }
     .navlink::after {
       content: ''; position: absolute; left: 0; bottom: -5px; height: 2px; width: 100%;
-      background: #c67b5c; transform: scaleX(0); transform-origin: right;
+      background: #9b86c4; transform: scaleX(0); transform-origin: right;
       transition: transform .3s cubic-bezier(.22,1,.36,1);
     }
     .navlink:hover::after, .navlink.active::after { transform: scaleX(1); transform-origin: left; }
 
     /* ---------- Buttons ---------- */
     .btn { transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s ease, background-color .25s ease; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -12px rgba(61,58,54,.5); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -12px rgba(52,58,77,.5); }
     .btn:active { transform: translateY(0); }
 
     .img-placeholder {
@@ -166,13 +173,13 @@
 
   <!-- ================= HERO ================= -->
   <section id="top" class="relative min-h-[92vh] flex items-center pt-[74px] overflow-hidden">
-    <!-- HERO BACKGROUND — TODO: swap for Mesha's own treatment-room photo. -->
+    <!-- HERO BACKGROUND — Mesha's own treatment room. -->
     <div id="hero-bg" class="absolute inset-[-6%] img-placeholder will-change-transform"
-         style="background-image:linear-gradient(rgba(61,58,54,.5),rgba(61,58,54,.5)), url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1600&q=80');">
+         style="background-image:linear-gradient(rgba(38,42,60,.62),rgba(38,42,60,.62)), url('assets/hero-room.jpg');">
     </div>
-    <!-- Warm light that follows the mouse -->
+    <!-- Soft light that follows the mouse -->
     <div id="hero-glow" class="absolute inset-0 pointer-events-none transition-opacity duration-500"
-         style="background: radial-gradient(520px circle at 50% 50%, rgba(198,123,92,.22), transparent 70%);"></div>
+         style="background: radial-gradient(520px circle at 50% 50%, rgba(155,134,196,.22), transparent 70%);"></div>
 
     <div class="relative max-w-6xl mx-auto px-5 w-full">
       <div class="max-w-2xl">
@@ -185,7 +192,7 @@
           for every body. Your wellness is essential, not an afterthought.
         </p>
         <div class="flex flex-wrap gap-4 reveal">
-          <a href="#booking" class="btn inline-block rounded-full bg-terracotta hover:bg-[#b56b4d] text-white text-base font-semibold px-8 py-4 shadow-lg">
+          <a href="#booking" class="btn inline-block rounded-full bg-terracotta hover:bg-[#836ba8] text-white text-base font-semibold px-8 py-4 shadow-lg">
             Book Your Session
           </a>
           <a href="#services" class="btn inline-block rounded-full border border-white/70 hover:bg-white hover:text-charcoal text-white text-base font-semibold px-8 py-4">
@@ -462,10 +469,10 @@
   <section id="about" class="py-20 sm:py-28 bg-beige">
     <div class="max-w-6xl mx-auto px-5 grid gap-12 lg:grid-cols-2 items-center">
 
-      <!-- ABOUT PHOTO — TODO: replace with a real, friendly photo of Mesha. -->
-      <div class="reveal img-placeholder rounded-3xl aspect-[4/5] w-full max-w-md mx-auto shadow-md tilt"
-           style="background-image:linear-gradient(rgba(138,154,130,.35),rgba(138,154,130,.35)), url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80');">
-        Photo of Mesha
+      <!-- ABOUT PHOTO — Mesha at work. -->
+      <div class="reveal rounded-3xl aspect-[4/5] w-full max-w-md mx-auto shadow-md tilt overflow-hidden bg-cover bg-center"
+           role="img" aria-label="Mesha giving a hot-stone massage in her treatment room"
+           style="background-image:url('assets/about-mesha.jpg');">
       </div>
 
       <div>
@@ -493,6 +500,26 @@
           Book a Session
         </a>
         <!-- TODO: add license # / credentials here if Mesha wants them shown. -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WELCOME VIDEO ================= -->
+  <section class="py-20 sm:py-28 bg-cream">
+    <div class="max-w-4xl mx-auto px-5 text-center">
+      <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3 reveal">A Warm Welcome</p>
+      <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk mb-4 reveal">Step Inside</h2>
+      <p class="text-charcoal/70 max-w-xl mx-auto mb-10 reveal">
+        Take a moment to meet Mesha and get a feel for the calm, welcoming space
+        waiting for you in Bolingbrook.
+      </p>
+      <div class="reveal tilt rounded-3xl overflow-hidden shadow-xl ring-1 ring-beige bg-charcoal">
+        <video class="w-full h-auto block" controls preload="none"
+               poster="assets/welcome-poster.jpg" playsinline>
+          <source src="assets/welcome.mp4" type="video/mp4" />
+          Your browser doesn't support embedded video —
+          <a href="assets/welcome.mp4" class="underline">watch the welcome clip here</a>.
+        </video>
       </div>
     </div>
   </section>
@@ -604,8 +631,11 @@
   </section>
 
   <!-- ================= BOOKING (CAL.COM PLACEHOLDER) ================= -->
-  <section id="booking" class="py-20 sm:py-28 bg-sage text-white">
-    <div class="max-w-5xl mx-auto px-5">
+  <section id="booking" class="relative py-20 sm:py-28 bg-sage text-white overflow-hidden">
+    <!-- Photo backdrop with periwinkle overlay so the booking card stays readable. -->
+    <div class="absolute inset-0 bg-cover bg-center"
+         style="background-image:linear-gradient(rgba(92,103,160,.86),rgba(74,84,138,.9)), url('assets/booking-stones.jpg');"></div>
+    <div class="relative max-w-5xl mx-auto px-5">
       <div class="text-center mb-12">
         <p class="uppercase tracking-[0.25em] text-xs font-semibold text-white/80 mb-3 reveal">Ready When You Are</p>
         <h2 class="font-serif text-4xl sm:text-5xl mb-5 reveal">Book Your Session</h2>
@@ -721,7 +751,7 @@
           <button class="btn rounded-full bg-white ring-1 ring-beige hover:ring-sage px-6 py-3 font-semibold">$180</button>
           <button class="btn rounded-full bg-white ring-1 ring-beige hover:ring-sage px-6 py-3 font-semibold">Custom</button>
         </div>
-        <button class="btn mt-6 rounded-full bg-terracotta hover:bg-[#b56b4d] text-white font-semibold px-8 py-3.5 shadow-lg reveal">
+        <button class="btn mt-6 rounded-full bg-terracotta hover:bg-[#836ba8] text-white font-semibold px-8 py-3.5 shadow-lg reveal">
           Buy a Gift Certificate
         </button>
         <p class="text-xs text-charcoal/45 mt-3 reveal">Checkout powered by Stripe — being set up.</p>
@@ -890,13 +920,13 @@
         const py = (e.clientY - r.top) / r.height;
         bg.style.transform = `translate(${(px - .5) * -22}px, ${(py - .5) * -18}px) scale(1.04)`;
         glow.style.background =
-          `radial-gradient(520px circle at ${px * 100}% ${py * 100}%, rgba(198,123,92,.26), transparent 70%)`;
+          `radial-gradient(520px circle at ${px * 100}% ${py * 100}%, rgba(155,134,196,.26), transparent 70%)`;
       });
 
       hero.addEventListener('mouseleave', () => {
         bg.style.transform = '';
         glow.style.background =
-          'radial-gradient(520px circle at 50% 50%, rgba(198,123,92,.18), transparent 70%)';
+          'radial-gradient(520px circle at 50% 50%, rgba(155,134,196,.18), transparent 70%)';
       });
     })();
 

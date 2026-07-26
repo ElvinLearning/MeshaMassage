@@ -35,7 +35,7 @@ Migration path once she's on board:
 - **Phone:** (331) 233-3613
 - **Rating:** 5.0 across 45+ verified reviews
 - **Clientele:** Everyone — gender-inclusive, all ages and bodies welcome
-- **Vibe:** Warm, calm, clean spa aesthetic — soft neutrals, generous whitespace
+- **Vibe:** Calm, clean spa aesthetic — soft grays, blues & purples (client preference), generous whitespace
 
 ---
 
@@ -108,7 +108,7 @@ Both are labeled "coming soon" on the page so nothing reads as live when it isn'
 
 Search `TODO` in `index.html`:
 
-- [ ] Real photos — hero background and About photo (currently stock)
+- [x] Real photos — hero, About, welcome video & booking backdrop now use Mesha's own shots (in `/assets`)
 - [ ] Her **email address** — not listed publicly, and we don't have it
 - [ ] Confirm exact **Instagram** and **Facebook** URLs
 - [ ] License # / credentials in the About section, if she wants them shown
