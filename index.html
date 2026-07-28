@@ -6,6 +6,24 @@
   <meta name="description" content="Essential Massage by Mesha — holistic, personalized massage therapy in Bolingbrook, IL. Swedish, deep tissue, prenatal, lymphatic drainage, body sculpting & more. Book direct." />
   <title>Essential Massage by Mesha | Massage Therapy in Bolingbrook, IL</title>
 
+  <!-- Her lotus mark, redrawn as SVG — see assets/lotus.svg -->
+  <link rel="icon" type="image/svg+xml" href="assets/lotus.svg" />
+  <meta name="theme-color" content="#7c6a92" />
+
+  <!-- Social share card.
+       These MUST be absolute URLs — Facebook, iMessage, WhatsApp and LinkedIn
+       will not resolve a relative path, and the card silently renders blank.
+       >>> UPDATE ALL FOUR when a custom domain is connected. <<< -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://elvinlearning.github.io/MeshaMassage/" />
+  <meta property="og:title" content="Essential Massage by Mesha | Bolingbrook, IL" />
+  <meta property="og:description" content="Holistic, personalized massage therapy in a warm, welcoming space — for every body. Book direct with Mesha." />
+  <meta property="og:image" content="https://elvinlearning.github.io/MeshaMassage/assets/photos/og-share.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Essential Massage by Mesha | Bolingbrook, IL" />
+  <meta name="twitter:description" content="Holistic, personalized massage therapy in a warm, welcoming space — for every body." />
+  <meta name="twitter:image" content="https://elvinlearning.github.io/MeshaMassage/assets/photos/og-share.jpg" />
+
   <!-- ============================================================
        MOCKUP BUILD — Essential Massage by Mesha
        Built by Cozy Digital (cozydigital.org)
@@ -19,8 +37,14 @@
          Search "CAL.COM" to find the swap-in spot.
        - Payments / gift cards = Stripe placeholder.
          Search "STRIPE" to find the swap-in spot.
-       - Search "TODO" for the handful of things we still need
-         from Mesha (real photos, email address, social URLs).
+       - Photos + video are HERS (shoot supplied Jul 2026). Stock imagery
+         is gone: hero runs her promo b-roll, #studio runs her welcome
+         video and treatment-room gallery.
+       - The lotus in the nav/footer is redrawn from her uniform in the
+         photos (assets/lotus.svg) — swap in her real vector file when
+         she sends it, and confirm the blue.
+       - Search "TODO" for what we still need from her
+         (email address, social URLs, license #).
 
        Single file, no build step. Just open it or host it as-is.
        ============================================================ -->
@@ -39,12 +63,12 @@
       theme: {
         extend: {
           colors: {
-            cream:     '#faf6f0', // page background
-            beige:     '#efe6da', // soft cards / sections
-            sage:      '#8a9a82', // primary calm green
-            'sage-dk': '#6f7f68', // darker sage for hover
-            terracotta:'#c67b5c', // warm accent
-            charcoal:  '#3d3a36', // body text
+            cream:     '#faf7f4', // page background — barely cooled off-white
+            beige:     '#ede6ec', // soft cards / sections — mauve-tinted
+            plum:      '#7c6a92', // primary — dusty plum
+            'plum-dk': '#63527a', // darker plum for hover
+            terracotta:'#c67b5c', // warm accent — kept for warm/cool contrast
+            charcoal:  '#3a3440', // body text — aubergine-tinted
           },
           fontFamily: {
             serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
@@ -71,7 +95,7 @@
       }
       #cursor-dot  { width: 7px;  height: 7px;  background: #c67b5c; }
       #cursor-ring {
-        width: 38px; height: 38px; border: 1.5px solid rgba(138,154,130,.85);
+        width: 38px; height: 38px; border: 1.5px solid rgba(124,106,146,.85);
         transition: width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease;
       }
       body.cursor-hot #cursor-ring {
@@ -104,7 +128,7 @@
       opacity: 0; transition: opacity .3s ease; pointer-events: none;
     }
     .tilt:hover::after { opacity: 1; }
-    .tilt:hover { box-shadow: 0 22px 45px -22px rgba(61,58,54,.42); }
+    .tilt:hover { box-shadow: 0 22px 45px -22px rgba(58,52,64,.42); }
 
     /* ---------- Animated underline for nav links ---------- */
     .navlink { position: relative; }
@@ -117,7 +141,7 @@
 
     /* ---------- Buttons ---------- */
     .btn { transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s ease, background-color .25s ease; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -12px rgba(61,58,54,.5); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -12px rgba(58,52,64,.5); }
     .btn:active { transform: translateY(0); }
 
     .img-placeholder {
@@ -131,10 +155,61 @@
     .pill { transition: background-color .25s ease, color .25s ease, transform .2s ease; }
     .pill:hover { transform: translateY(-1px); }
 
+    /* ---------- Studio gallery ---------- */
+    .shot { overflow: hidden; }
+    .shot img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .7s cubic-bezier(.22,1,.36,1), filter .5s ease;
+    }
+    .shot:hover img { transform: scale(1.06); filter: saturate(1.08); }
+
+    /* ---------- Lightbox ---------- */
+    #lightbox {
+      position: fixed; inset: 0; z-index: 9998; display: none;
+      align-items: center; justify-content: center; padding: 5vmin;
+      background: rgba(33,29,38,.93); backdrop-filter: blur(6px);
+      opacity: 0; transition: opacity .3s ease;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox.shown { opacity: 1; }
+    #lightbox img {
+      max-width: 100%; max-height: 100%;
+      border-radius: 1rem; box-shadow: 0 30px 70px -20px rgba(0,0,0,.7);
+    }
+    #lightbox button {
+      position: absolute; top: 1.25rem; right: 1.5rem;
+      font-size: 2rem; line-height: 1; color: #faf7f4;
+      background: none; border: 0; padding: .25rem .6rem; border-radius: 9999px;
+      transition: background-color .2s ease;
+    }
+    #lightbox button:hover { background: rgba(250,247,244,.15); }
+
+    /* ---------- Welcome video player ---------- */
+    .video-shell { position: relative; overflow: hidden; }
+    .video-shell video { width: 100%; display: block; }
+    #welcome-play {
+      position: absolute; inset: 0; z-index: 2; display: flex;
+      align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
+      background: linear-gradient(rgba(58,52,64,.25), rgba(58,52,64,.55));
+      border: 0; width: 100%; color: #fff;
+      transition: opacity .4s ease, background-color .4s ease;
+    }
+    #welcome-play .ring {
+      width: 84px; height: 84px; border-radius: 9999px;
+      background: rgba(250,247,244,.16); border: 2px solid rgba(250,247,244,.85);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(4px);
+      transition: transform .35s cubic-bezier(.22,1,.36,1), background-color .35s ease;
+    }
+    #welcome-play:hover .ring { transform: scale(1.09); background: rgba(198,123,92,.55); }
+    #welcome-play.hidden { opacity: 0; pointer-events: none; }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .reveal { opacity: 1 !important; transform: none !important; transition: none; }
       .tilt, .btn { transition: none; }
+      .shot img, #welcome-play .ring { transition: none; }
+      .shot:hover img { transform: none; }
     }
   </style>
 </head>
@@ -148,17 +223,22 @@
   <!-- ================= STICKY NAV ================= -->
   <header id="nav" class="fixed top-0 inset-x-0 z-50 bg-cream/85 backdrop-blur-md border-b border-beige transition-all duration-300">
     <div class="max-w-6xl mx-auto px-5 h-[74px] flex items-center justify-between">
-      <a href="#top" class="font-serif text-xl sm:text-2xl text-sage-dk leading-none hover:text-terracotta transition-colors">
-        Essential Massage <span class="block text-xs tracking-[0.25em] uppercase text-terracotta font-sans font-semibold">by Mesha</span>
+      <a href="#top" class="group flex items-center gap-3 font-serif text-xl sm:text-2xl text-plum-dk leading-none hover:text-terracotta transition-colors">
+        <img src="assets/lotus.svg" alt="" aria-hidden="true"
+             class="h-9 w-auto shrink-0 group-hover:scale-105 transition-transform duration-300" />
+        <span>Essential Massage <span class="block text-xs tracking-[0.25em] uppercase text-terracotta font-sans font-semibold">by Mesha</span></span>
       </a>
-      <nav class="hidden md:flex items-center gap-7 text-sm font-semibold">
-        <a href="#services" class="navlink hover:text-sage transition-colors">Services</a>
-        <a href="#about"    class="navlink hover:text-sage transition-colors">About</a>
-        <a href="#reviews"  class="navlink hover:text-sage transition-colors">Reviews</a>
-        <a href="#gift"     class="navlink hover:text-sage transition-colors">Gift Cards</a>
-        <a href="#visit"    class="navlink hover:text-sage transition-colors">Visit</a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a href="#services" class="navlink hover:text-plum transition-colors">Services</a>
+        <!-- Held back until lg — 7 links overflow the bar at the md breakpoint. -->
+        <a href="#packages" class="navlink hover:text-plum transition-colors hidden lg:inline-block">Packages</a>
+        <a href="#about"    class="navlink hover:text-plum transition-colors">About</a>
+        <a href="#studio"   class="navlink hover:text-plum transition-colors">Studio</a>
+        <a href="#reviews"  class="navlink hover:text-plum transition-colors">Reviews</a>
+        <a href="#gift"     class="navlink hover:text-plum transition-colors">Gift Cards</a>
+        <a href="#visit"    class="navlink hover:text-plum transition-colors">Visit</a>
       </nav>
-      <a href="#booking" class="btn rounded-full bg-sage hover:bg-sage-dk text-white text-sm font-semibold px-5 py-2.5 shadow-sm">
+      <a href="#booking" class="btn rounded-full bg-plum hover:bg-plum-dk text-white text-sm font-semibold px-5 py-2.5 shadow-sm">
         Book Now
       </a>
     </div>
@@ -166,10 +246,18 @@
 
   <!-- ================= HERO ================= -->
   <section id="top" class="relative min-h-[92vh] flex items-center pt-[74px] overflow-hidden">
-    <!-- HERO BACKGROUND — TODO: swap for Mesha's own treatment-room photo. -->
-    <div id="hero-bg" class="absolute inset-[-6%] img-placeholder will-change-transform"
-         style="background-image:linear-gradient(rgba(61,58,54,.5),rgba(61,58,54,.5)), url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1600&q=80');">
+    <!-- HERO BACKGROUND — Mesha in her own treatment room. Chosen over the
+         promo b-roll on purpose: the first thing a visitor should see is the
+         therapist at work in a real clinical space. The b-roll close-ups run
+         in the quote band further down, where they read as texture. -->
+    <div id="hero-bg" class="absolute inset-[-6%] will-change-transform">
+      <img src="assets/photos/hero-studio.jpg" alt="" aria-hidden="true"
+           class="w-full h-full object-cover" />
     </div>
+    <!-- Tint so the headline stays legible. The second, horizontal pass keeps the
+         copy side dark while letting Mesha stay bright on the right. -->
+    <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-charcoal/50 via-charcoal/40 to-charcoal/70"></div>
+    <div class="absolute inset-0 pointer-events-none bg-gradient-to-r from-charcoal/65 via-charcoal/25 to-transparent"></div>
     <!-- Warm light that follows the mouse -->
     <div id="hero-glow" class="absolute inset-0 pointer-events-none transition-opacity duration-500"
          style="background: radial-gradient(520px circle at 50% 50%, rgba(198,123,92,.22), transparent 70%);"></div>
@@ -203,10 +291,90 @@
   <!-- ================= TRUST BAR ================= -->
   <section class="bg-beige border-y border-beige">
     <div class="max-w-6xl mx-auto px-5 py-7 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-      <div class="reveal"><p class="font-serif text-3xl text-sage-dk">5.0</p><p class="text-xs uppercase tracking-widest text-charcoal/60 mt-1">Star Rating</p></div>
-      <div class="reveal"><p class="font-serif text-3xl text-sage-dk">45+</p><p class="text-xs uppercase tracking-widest text-charcoal/60 mt-1">Verified Reviews</p></div>
-      <div class="reveal"><p class="font-serif text-3xl text-sage-dk">15</p><p class="text-xs uppercase tracking-widest text-charcoal/60 mt-1">Services Offered</p></div>
-      <div class="reveal"><p class="font-serif text-3xl text-sage-dk">Licensed</p><p class="text-xs uppercase tracking-widest text-charcoal/60 mt-1">Massage Therapist</p></div>
+      <div class="reveal"><p class="font-serif text-3xl text-plum-dk">5.0</p><p class="text-xs uppercase tracking-widest text-charcoal/60 mt-1">Star Rating</p></div>
+      <div class="reveal"><p class="font-serif text-3xl text-plum-dk">45+</p><p class="text-xs uppercase tracking-widest text-charcoal/60 mt-1">Verified Reviews</p></div>
+      <div class="reveal"><p class="font-serif text-3xl text-plum-dk">29</p><p class="text-xs uppercase tracking-widest text-charcoal/60 mt-1">Services &amp; Packages</p></div>
+      <div class="reveal"><p class="font-serif text-3xl text-plum-dk">Licensed</p><p class="text-xs uppercase tracking-widest text-charcoal/60 mt-1">Massage Therapist</p></div>
+    </div>
+  </section>
+
+  <!-- ================= STEP INSIDE (VIDEO + STUDIO GALLERY) ================= -->
+  <section id="studio" class="py-20 sm:py-28 bg-charcoal">
+    <div class="max-w-6xl mx-auto px-5">
+
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3 reveal">Step Inside</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-cream reveal">See the space before you book.</h2>
+        <p class="text-cream/60 mt-5 leading-relaxed reveal">
+          A private suite in Bolingbrook — not a chain, not a storefront with a queue.
+          Here's Mesha to show you around herself.
+        </p>
+      </div>
+
+      <!-- Welcome video. preload="none" so the file only downloads if you press play. -->
+      <div class="video-shell reveal rounded-3xl shadow-2xl ring-1 ring-cream/10 max-w-4xl mx-auto mb-16">
+        <!-- `controls` is added by JS on play, so the native control bar can't
+             paint over the cover overlay before you've started the video. -->
+        <video id="welcome-video" class="rounded-3xl" playsinline preload="none"
+               poster="assets/video/welcome-poster.jpg">
+          <source src="assets/video/welcome.mp4" type="video/mp4" />
+          Your browser can't play embedded video — call (331) 233-3613 and Mesha will happily talk you through it.
+        </video>
+        <button id="welcome-play" type="button" class="rounded-3xl" aria-label="Play Mesha's welcome video">
+          <span class="ring">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 ml-1" aria-hidden="true">
+              <path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l11.14-6.86a1 1 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14Z"/>
+            </svg>
+          </span>
+          <span class="font-serif text-2xl sm:text-3xl">Meet Mesha</span>
+          <span class="text-xs uppercase tracking-[0.25em] text-cream/75">A 33-second welcome</span>
+        </button>
+      </div>
+
+      <!-- Studio gallery — real photos from her room. Click any one to enlarge. -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4
+                  auto-rows-[140px] sm:auto-rows-[185px] lg:auto-rows-[205px]">
+
+        <button class="shot reveal rounded-2xl col-span-2 lg:row-span-2" data-full="assets/photos/studio-room.jpg">
+          <img src="assets/photos/studio-room.jpg" loading="lazy" decoding="async"
+               alt="Mesha's private treatment room, softly lit, with a client on the table" />
+        </button>
+        <button class="shot reveal rounded-2xl lg:row-span-2" data-full="assets/photos/stone-therapy.jpg">
+          <img src="assets/photos/stone-therapy.jpg" loading="lazy" decoding="async"
+               alt="Mesha working along a client's back with a heated stone" />
+        </button>
+        <button class="shot reveal rounded-2xl" data-full="assets/photos/hot-stone.jpg">
+          <img src="assets/photos/hot-stone.jpg" loading="lazy" decoding="async"
+               alt="Close-up of a warm basalt stone being drawn along the back" />
+        </button>
+        <button class="shot reveal rounded-2xl" data-full="assets/photos/deep-tissue.jpg">
+          <img src="assets/photos/deep-tissue.jpg" loading="lazy" decoding="async"
+               alt="Focused thumb pressure released into the upper back" />
+        </button>
+
+        <button class="shot reveal rounded-2xl lg:row-span-2" data-full="assets/photos/mesha-working.jpg">
+          <img src="assets/photos/mesha-working.jpg" loading="lazy" decoding="async"
+               alt="Mesha in her lotus-logo polo, working through a client's shoulder" />
+        </button>
+        <button class="shot reveal rounded-2xl col-span-2" data-full="assets/photos/neck-cradle-wide.jpg">
+          <img src="assets/photos/neck-cradle-wide.jpg" loading="lazy" decoding="async"
+               alt="Mesha cradling a client's head during a neck release" />
+        </button>
+        <button class="shot reveal rounded-2xl lg:row-span-2" data-full="assets/photos/scalp-release.jpg">
+          <img src="assets/photos/scalp-release.jpg" loading="lazy" decoding="async"
+               alt="Mesha supporting a client's neck and jaw at the head of the table" />
+        </button>
+        <button class="shot reveal rounded-2xl" data-full="assets/photos/swedish-back.jpg">
+          <img src="assets/photos/swedish-back.jpg" loading="lazy" decoding="async"
+               alt="Long, flowing Swedish strokes across a client's back" />
+        </button>
+        <button class="shot reveal rounded-2xl" data-full="assets/photos/myofascial.jpg">
+          <img src="assets/photos/myofascial.jpg" loading="lazy" decoding="async"
+               alt="Both hands working slowly through the tissue along a client's shoulder blade" />
+        </button>
+      </div>
+
+      <p class="text-center text-cream/40 text-xs mt-8 reveal">Tap any photo to enlarge</p>
     </div>
   </section>
 
@@ -215,16 +383,21 @@
     <div class="max-w-6xl mx-auto px-5">
       <div class="text-center max-w-2xl mx-auto mb-10">
         <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3 reveal">What We Offer</p>
-        <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk mb-4 reveal">Services &amp; Pricing</h2>
+        <h2 class="font-serif text-4xl sm:text-5xl text-plum-dk mb-4 reveal">Services &amp; Pricing</h2>
         <p class="text-charcoal/70 reveal">
           Every session is tailored to you. New to massage or not sure what you need?
           Just ask — Mesha will help you choose.
+        </p>
+        <p class="mt-4 reveal">
+          <a href="#packages" class="text-sm font-semibold text-terracotta hover:underline">
+            Coming back regularly? Save up to 33% with a series &rarr;
+          </a>
         </p>
       </div>
 
       <!-- Category filter -->
       <div class="flex flex-wrap justify-center gap-3 mb-12 reveal" id="filters">
-        <button class="pill rounded-full px-5 py-2 text-sm font-semibold bg-sage text-white" data-filter="all">All Services</button>
+        <button class="pill rounded-full px-5 py-2 text-sm font-semibold bg-plum text-white" data-filter="all">All Services</button>
         <button class="pill rounded-full px-5 py-2 text-sm font-semibold bg-white ring-1 ring-beige text-charcoal/75 hover:bg-beige" data-filter="massage">Massage</button>
         <button class="pill rounded-full px-5 py-2 text-sm font-semibold bg-white ring-1 ring-beige text-charcoal/75 hover:bg-beige" data-filter="recovery">Recovery &amp; Wellness</button>
         <button class="pill rounded-full px-5 py-2 text-sm font-semibold bg-white ring-1 ring-beige text-charcoal/75 hover:bg-beige" data-filter="sculpt">Body Sculpting</button>
@@ -237,7 +410,7 @@
         <!-- ---------- MASSAGE ---------- -->
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="massage">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">🌿</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">🌿</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Swedish</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Swedish Massage</h3>
@@ -245,13 +418,13 @@
             Massage oil or cream is used with smooth, gliding strokes. Firm but gentle pressure
             promotes relaxation and eases muscle tension — a classic that lets you slip into calm.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$120</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$120</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="massage">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">💪</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">💪</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Deep Tissue</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Deep Tissue Massage</h3>
@@ -259,13 +432,13 @@
             Designed to remove severe tension, deep tissue relieves both muscle and the connective
             tissue below the surface — improving range of motion and helping injuries heal.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$130</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$130</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="massage">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">🤰</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">🤰</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Prenatal</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Prenatal Massage</h3>
@@ -273,13 +446,13 @@
             Extra pillows for comfort, performed in a supported side-lying position. Smooth, gliding
             Swedish strokes with gentle pressure — safe, nurturing relief for the aches of pregnancy.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$130</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min &nbsp;·&nbsp; $170 / 90 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$130</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min &nbsp;·&nbsp; $170 / 90 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="massage">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">⏱️</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">⏱️</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Sports</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">30 Minute Massage</h3>
@@ -287,13 +460,13 @@
             A variety of massage techniques designed to help your body feel freer and stronger.
             Perfect for a targeted reset on a busy day.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$70</span> <span class="text-charcoal/50 text-sm font-normal">/ 30 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$70</span> <span class="text-charcoal/50 text-sm font-normal">/ 30 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="massage">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">🕰️</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">🕰️</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Swedish</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">90 Minute Massage</h3>
@@ -301,13 +474,13 @@
             The full unwind. Smooth, gliding Swedish strokes with firm but gentle pressure —
             more time means deeper relaxation and more ground covered.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$170</span> <span class="text-charcoal/50 text-sm font-normal">/ 90 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$170</span> <span class="text-charcoal/50 text-sm font-normal">/ 90 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="massage">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">🪷</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">🪷</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Myofascial</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">2 Hour Myofascial Release</h3>
@@ -315,14 +488,14 @@
             Soft tissue therapy for skeletal muscle immobility and pain. Constant, patient force
             moves slowly through each layer of fascia until the deep tissue releases.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$200</span> <span class="text-charcoal/50 text-sm font-normal">/ 120 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$200</span> <span class="text-charcoal/50 text-sm font-normal">/ 120 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <!-- ---------- RECOVERY & WELLNESS ---------- -->
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="recovery">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">🩹</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">🩹</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Rehab</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Rehab Therapy Massage</h3>
@@ -330,13 +503,13 @@
             Focused healing for a specific area of pain, using cupping, massage gun and heated
             scraper as needed, plus stretching. You go home with a self-care ball and exercises.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$140</span> <span class="text-charcoal/50 text-sm font-normal">/ 70 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$140</span> <span class="text-charcoal/50 text-sm font-normal">/ 70 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="recovery">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">💧</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">💧</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Lymphatic</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Manual Lymphatic Drainage</h3>
@@ -344,13 +517,13 @@
             A gentle massage that encourages natural lymph drainage, carrying waste away from the
             tissues. Helps relieve swelling after surgery, medical treatment, or illness.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$145</span> <span class="text-charcoal/50 text-sm font-normal">/ 50 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$145</span> <span class="text-charcoal/50 text-sm font-normal">/ 50 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="recovery">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">✨</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">✨</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Signature</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Pamper Me Please</h3>
@@ -359,13 +532,13 @@
             choice, 10-minute head therapy (face mask, scalp &amp; face massage), a sip of choice,
             and a self-care gift to take home.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$180</span> <span class="text-charcoal/50 text-sm font-normal">/ 80 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$180</span> <span class="text-charcoal/50 text-sm font-normal">/ 80 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="recovery">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">🦶</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">🦶</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Bath</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Hot Foot Bath Deluxe</h3>
@@ -373,13 +546,13 @@
             A relaxing hot foot bath with a body-butter foot scrub, Himalayan bath salts and your
             choice of scent — lavender, eucalyptus or rose. Sip of choice included.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$35</span> <span class="text-charcoal/50 text-sm font-normal">/ 15 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$35</span> <span class="text-charcoal/50 text-sm font-normal">/ 15 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="recovery">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">🔴</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">🔴</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Light Therapy</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Red Light Therapy</h3>
@@ -388,13 +561,13 @@
             boosting mitochondrial energy production. This service is light therapy only —
             no massage is performed.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$45</span> <span class="text-charcoal/50 text-sm font-normal">/ 30 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$45</span> <span class="text-charcoal/50 text-sm font-normal">/ 30 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="recovery">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">🔥</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">🔥</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Weight Loss</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Sauna Blanket</h3>
@@ -402,14 +575,14 @@
             Raises core body temperature to help the body burn more calories, stimulate metabolism
             and support fat breakdown. A great add-on to any session.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$50</span> <span class="text-charcoal/50 text-sm font-normal">/ 30 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$50</span> <span class="text-charcoal/50 text-sm font-normal">/ 30 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <!-- ---------- BODY SCULPTING ---------- -->
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="sculpt">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">🪵</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">🪵</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Wood Therapy</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Wood Therapy</h3>
@@ -417,13 +590,13 @@
             A non-invasive sculpting technique using wooden instruments to massage, contour and
             apply pressure to specific areas — improving appearance while promoting wellness.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$50</span> <span class="text-charcoal/50 text-sm font-normal">/ 25 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$50</span> <span class="text-charcoal/50 text-sm font-normal">/ 25 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
         <article class="svc tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige flex flex-col" data-cat="sculpt">
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-sage/15 text-sage-dk flex items-center justify-center text-2xl">💫</div>
+            <div class="w-12 h-12 rounded-2xl bg-plum/15 text-plum-dk flex items-center justify-center text-2xl">💫</div>
             <span class="text-xs uppercase tracking-widest text-charcoal/40 font-semibold">Contouring</span>
           </div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Body Sculpting</h3>
@@ -431,7 +604,7 @@
             Body contouring that includes a consultation, wood therapy, body cavitation machine
             and lymphatic drainage — all in one session.
           </p>
-          <p class="mt-5 font-semibold text-sage-dk"><span class="text-2xl">$200</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min</span></p>
+          <p class="mt-5 font-semibold text-plum-dk"><span class="text-2xl">$200</span> <span class="text-charcoal/50 text-sm font-normal">/ 60 min</span></p>
           <a href="#booking" class="mt-4 text-sm font-semibold text-terracotta hover:underline">Book this &rarr;</a>
         </article>
 
@@ -458,19 +631,231 @@
     </div>
   </section>
 
+  <!-- ================= PACKAGES / SERIES =================
+       Her 14 "Series" bundles. Per-session price and saving are computed from
+       her own numbers — the single-session rate is shown alongside so the
+       discount is verifiable rather than asserted. -->
+  <section id="packages" class="py-20 sm:py-28 bg-beige">
+    <div class="max-w-6xl mx-auto px-5">
+
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3 reveal">Book More, Pay Less</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-plum-dk mb-4 reveal">Packages &amp; Series</h2>
+        <p class="text-charcoal/70 reveal">
+          Bodywork works best as a habit, not a one-off. Buy sessions as a series and the
+          price per session drops — up to <strong class="text-plum-dk">33% off</strong> the
+          single-session rate.
+        </p>
+      </div>
+
+      <div class="grid gap-7 lg:grid-cols-2">
+
+        <!-- ---------- 60-MINUTE MASSAGE ---------- -->
+        <article class="pkg reveal tilt bg-white rounded-3xl p-7 sm:p-8 shadow-sm ring-1 ring-beige">
+          <div class="flex items-start justify-between mb-1 gap-4">
+            <h3 class="font-serif text-2xl text-charcoal">60-Minute Massage</h3>
+            <span class="shrink-0 text-xs uppercase tracking-widest text-charcoal/40 font-semibold mt-1.5">Series</span>
+          </div>
+          <p class="text-sm text-charcoal/55 mb-6">Single session $120</p>
+          <ul class="divide-y divide-beige">
+            <li class="flex items-center justify-between gap-4 py-3.5">
+              <span class="font-semibold text-charcoal">4 sessions</span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$380</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$95 each &middot; save $100</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between gap-4 py-3.5">
+              <span class="font-semibold text-charcoal">6 sessions</span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$540</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$90 each &middot; save $180</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between gap-4 py-3.5">
+              <span class="font-semibold text-charcoal">8 sessions</span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$680</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$85 each &middot; save $280</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between gap-4 py-3.5 -mx-3 px-3 rounded-xl bg-plum/[0.07]">
+              <span class="font-semibold text-charcoal">
+                10 sessions
+                <span class="block text-[10px] uppercase tracking-widest text-terracotta font-bold mt-0.5">Best value &middot; 33% off</span>
+              </span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$800</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$80 each &middot; save $400</span>
+              </span>
+            </li>
+          </ul>
+          <a href="#booking" class="mt-6 inline-block text-sm font-semibold text-terracotta hover:underline">Book a series &rarr;</a>
+        </article>
+
+        <!-- ---------- 90-MINUTE MASSAGE ---------- -->
+        <article class="pkg reveal tilt bg-white rounded-3xl p-7 sm:p-8 shadow-sm ring-1 ring-beige">
+          <div class="flex items-start justify-between mb-1 gap-4">
+            <h3 class="font-serif text-2xl text-charcoal">90-Minute Massage</h3>
+            <span class="shrink-0 text-xs uppercase tracking-widest text-charcoal/40 font-semibold mt-1.5">Series</span>
+          </div>
+          <p class="text-sm text-charcoal/55 mb-6">Single session $170</p>
+          <ul class="divide-y divide-beige">
+            <li class="flex items-center justify-between gap-4 py-3.5">
+              <span class="font-semibold text-charcoal">2 sessions</span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$300</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$150 each &middot; save $40</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between gap-4 py-3.5">
+              <span class="font-semibold text-charcoal">4 sessions</span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$560</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$140 each &middot; save $120</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between gap-4 py-3.5">
+              <span class="font-semibold text-charcoal">6 sessions</span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$810</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$135 each &middot; save $210</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between gap-4 py-3.5">
+              <span class="font-semibold text-charcoal">8 sessions</span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$1,040</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$130 each &middot; save $320</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between gap-4 py-3.5 -mx-3 px-3 rounded-xl bg-plum/[0.07]">
+              <span class="font-semibold text-charcoal">
+                10 sessions
+                <span class="block text-[10px] uppercase tracking-widest text-terracotta font-bold mt-0.5">Best value &middot; 26% off</span>
+              </span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$1,250</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$125 each &middot; save $450</span>
+              </span>
+            </li>
+          </ul>
+          <a href="#booking" class="mt-6 inline-block text-sm font-semibold text-terracotta hover:underline">Book a series &rarr;</a>
+        </article>
+
+        <!-- ---------- BODY SCULPTING ---------- -->
+        <article class="pkg reveal tilt bg-white rounded-3xl p-7 sm:p-8 shadow-sm ring-1 ring-beige">
+          <div class="flex items-start justify-between mb-1 gap-4">
+            <h3 class="font-serif text-2xl text-charcoal">Body Sculpting</h3>
+            <span class="shrink-0 text-xs uppercase tracking-widest text-charcoal/40 font-semibold mt-1.5">Series</span>
+          </div>
+          <p class="text-sm text-charcoal/55 mb-6">Single session $200 &middot; results build over a course</p>
+          <ul class="divide-y divide-beige">
+            <li class="flex items-center justify-between gap-4 py-3.5">
+              <span class="font-semibold text-charcoal">6 sessions</span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$1,080</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$180 each &middot; save $120</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between gap-4 py-3.5">
+              <span class="font-semibold text-charcoal">8 sessions</span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$1,360</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$170 each &middot; save $240</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between gap-4 py-3.5">
+              <span class="font-semibold text-charcoal">10 sessions</span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$1,600</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$160 each &middot; save $400</span>
+              </span>
+            </li>
+            <li class="flex items-center justify-between gap-4 py-3.5 -mx-3 px-3 rounded-xl bg-plum/[0.07]">
+              <span class="font-semibold text-charcoal">
+                12 sessions
+                <span class="block text-[10px] uppercase tracking-widest text-terracotta font-bold mt-0.5">Best value &middot; 25% off</span>
+              </span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$1,800</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$150 each &middot; save $600</span>
+              </span>
+            </li>
+          </ul>
+          <a href="#booking" class="mt-6 inline-block text-sm font-semibold text-terracotta hover:underline">Book a series &rarr;</a>
+        </article>
+
+        <!-- ---------- MANUAL LYMPHATIC DRAINAGE ---------- -->
+        <article class="pkg reveal tilt bg-white rounded-3xl p-7 sm:p-8 shadow-sm ring-1 ring-beige">
+          <div class="flex items-start justify-between mb-1 gap-4">
+            <h3 class="font-serif text-2xl text-charcoal">Manual Lymphatic Drainage</h3>
+            <span class="shrink-0 text-xs uppercase tracking-widest text-charcoal/40 font-semibold mt-1.5">Series</span>
+          </div>
+          <p class="text-sm text-charcoal/55 mb-6">Single session $145 &middot; often booked post-surgery</p>
+          <ul class="divide-y divide-beige">
+            <li class="flex items-center justify-between gap-4 py-3.5 -mx-3 px-3 rounded-xl bg-plum/[0.07]">
+              <span class="font-semibold text-charcoal">
+                4 sessions
+                <span class="block text-[10px] uppercase tracking-widest text-terracotta font-bold mt-0.5">14% off</span>
+              </span>
+              <span class="text-right leading-tight">
+                <span class="font-serif text-xl text-plum-dk">$500</span>
+                <span class="block text-xs text-charcoal/55 mt-0.5">$125 each &middot; save $80</span>
+              </span>
+            </li>
+          </ul>
+          <p class="text-sm text-charcoal/60 leading-relaxed mt-6">
+            Need a different number of sessions, or a series of something not listed here?
+            <a href="tel:+13312333613" class="text-terracotta font-semibold hover:underline">Call or text Mesha</a>
+            and she'll put one together.
+          </p>
+          <a href="#booking" class="mt-5 inline-block text-sm font-semibold text-terracotta hover:underline">Book a series &rarr;</a>
+        </article>
+
+      </div>
+
+      <p class="text-center text-charcoal/45 text-xs mt-10 reveal">
+        Series are prepaid and redeemable against the matching service.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= QUOTE BAND (HER PROMO B-ROLL) =================
+       Mesha's own promo footage, trimmed to the section before her title
+       card. Heavily darkened and kept to a shallow band on purpose — at
+       this scale the close-ups read as warm texture behind the words. -->
+  <section class="relative flex items-center overflow-hidden min-h-[340px] h-[42vh]">
+    <video class="absolute inset-0 w-full h-full object-cover"
+           poster="assets/video/promo-loop-poster.jpg" data-ambient
+           autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
+      <source src="assets/video/promo-loop.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-charcoal/80"></div>
+
+    <div class="relative max-w-3xl mx-auto px-5 text-center">
+      <p class="font-serif text-3xl sm:text-4xl lg:text-5xl text-cream leading-snug reveal">
+        “You are never just another appointment.”
+      </p>
+      <p class="mt-6 uppercase tracking-[0.25em] text-[11px] sm:text-xs font-semibold text-terracotta reveal">
+        Every session shaped around what you need that day
+      </p>
+    </div>
+  </section>
+
   <!-- ================= ABOUT MESHA ================= -->
   <section id="about" class="py-20 sm:py-28 bg-beige">
     <div class="max-w-6xl mx-auto px-5 grid gap-12 lg:grid-cols-2 items-center">
 
-      <!-- ABOUT PHOTO — TODO: replace with a real, friendly photo of Mesha. -->
-      <div class="reveal img-placeholder rounded-3xl aspect-[4/5] w-full max-w-md mx-auto shadow-md tilt"
-           style="background-image:linear-gradient(rgba(138,154,130,.35),rgba(138,154,130,.35)), url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80');">
-        Photo of Mesha
-      </div>
+      <!-- ABOUT PHOTO — Mesha at work in her own studio. -->
+      <figure class="reveal shot rounded-3xl aspect-[4/5] w-full max-w-md mx-auto shadow-md tilt">
+        <img src="assets/photos/mesha-portrait.jpg" loading="lazy" decoding="async"
+             alt="Mesha working on a client's shoulders in her Bolingbrook treatment room" />
+      </figure>
 
       <div>
         <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3 reveal">Meet Your Therapist</p>
-        <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk mb-6 reveal">Hi, I'm Mesha.</h2>
+        <h2 class="font-serif text-4xl sm:text-5xl text-plum-dk mb-6 reveal">Hi, I'm Mesha.</h2>
         <div class="space-y-4 text-charcoal/80 leading-relaxed reveal">
           <p>
             In today's society we've grown accustomed to taking something for pain — a prescription,
@@ -489,7 +874,7 @@
             need that day.
           </p>
         </div>
-        <a href="#booking" class="btn inline-block mt-8 rounded-full bg-sage hover:bg-sage-dk text-white font-semibold px-7 py-3.5 shadow-sm reveal">
+        <a href="#booking" class="btn inline-block mt-8 rounded-full bg-plum hover:bg-plum-dk text-white font-semibold px-7 py-3.5 shadow-sm reveal">
           Book a Session
         </a>
         <!-- TODO: add license # / credentials here if Mesha wants them shown. -->
@@ -502,12 +887,12 @@
     <div class="max-w-6xl mx-auto px-5">
       <div class="text-center max-w-2xl mx-auto mb-14">
         <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3 reveal">Why Essential Massage</p>
-        <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk reveal">The Difference You'll Feel</h2>
+        <h2 class="font-serif text-4xl sm:text-5xl text-plum-dk reveal">The Difference You'll Feel</h2>
       </div>
 
       <div class="grid gap-8 sm:grid-cols-3 text-center">
         <div class="reveal tilt rounded-3xl px-6 py-8">
-          <div class="w-14 h-14 rounded-full bg-sage/15 text-sage-dk mx-auto flex items-center justify-center text-2xl mb-5">✔️</div>
+          <div class="w-14 h-14 rounded-full bg-plum/15 text-plum-dk mx-auto flex items-center justify-center text-2xl mb-5">✔️</div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Licensed &amp; Experienced</h3>
           <p class="text-charcoal/70 text-sm leading-relaxed">
             A licensed massage therapist you can trust — with 45+ five-star reviews from clients
@@ -515,7 +900,7 @@
           </p>
         </div>
         <div class="reveal tilt rounded-3xl px-6 py-8">
-          <div class="w-14 h-14 rounded-full bg-sage/15 text-sage-dk mx-auto flex items-center justify-center text-2xl mb-5">🤝</div>
+          <div class="w-14 h-14 rounded-full bg-plum/15 text-plum-dk mx-auto flex items-center justify-center text-2xl mb-5">🤝</div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Personalized Care</h3>
           <p class="text-charcoal/70 text-sm leading-relaxed">
             No two bodies are alike. Every session is customized to your goals, comfort,
@@ -523,7 +908,7 @@
           </p>
         </div>
         <div class="reveal tilt rounded-3xl px-6 py-8">
-          <div class="w-14 h-14 rounded-full bg-sage/15 text-sage-dk mx-auto flex items-center justify-center text-2xl mb-5">🕯️</div>
+          <div class="w-14 h-14 rounded-full bg-plum/15 text-plum-dk mx-auto flex items-center justify-center text-2xl mb-5">🕯️</div>
           <h3 class="font-serif text-2xl text-charcoal mb-2">Relaxing Environment</h3>
           <p class="text-charcoal/70 text-sm leading-relaxed">
             A serene, private suite in Bolingbrook designed to help you fully unwind
@@ -539,7 +924,7 @@
     <div class="max-w-6xl mx-auto px-5">
       <div class="text-center max-w-2xl mx-auto mb-14">
         <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3 reveal">Kind Words</p>
-        <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk mb-3 reveal">What Clients Are Saying</h2>
+        <h2 class="font-serif text-4xl sm:text-5xl text-plum-dk mb-3 reveal">What Clients Are Saying</h2>
         <p class="text-charcoal/70 reveal">Rated 5.0 stars across 45+ verified client reviews.</p>
       </div>
 
@@ -552,7 +937,7 @@
             to town on a massive knot. 90 minutes later, the tension and stiffness in my neck and upper
             back was gone."
           </blockquote>
-          <figcaption class="mt-5 font-semibold text-sage-dk">— Dan A. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
+          <figcaption class="mt-5 font-semibold text-plum-dk">— Dan A. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
         </figure>
 
         <figure class="reveal tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige/60">
@@ -562,7 +947,7 @@
             long time, so she was very patient and intuitive to my personal needs. I recommend this
             to anyone looking to relieve some of the stress life throws at us."
           </blockquote>
-          <figcaption class="mt-5 font-semibold text-sage-dk">— Anthony M. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
+          <figcaption class="mt-5 font-semibold text-plum-dk">— Anthony M. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
         </figure>
 
         <figure class="reveal tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige/60">
@@ -571,7 +956,7 @@
             "Mesha is very professional, listens to my needs each session, and sometimes finds spots
             I didn't even know were hurting. Highly recommended."
           </blockquote>
-          <figcaption class="mt-5 font-semibold text-sage-dk">— Terri W. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
+          <figcaption class="mt-5 font-semibold text-plum-dk">— Terri W. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
         </figure>
 
         <figure class="reveal tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige/60">
@@ -581,7 +966,7 @@
             to her clients. In all the years I was a member at a massage chain, I was never given as
             much care and regard for my total well being."
           </blockquote>
-          <figcaption class="mt-5 font-semibold text-sage-dk">— Doc S. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
+          <figcaption class="mt-5 font-semibold text-plum-dk">— Doc S. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
         </figure>
 
         <figure class="reveal tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige/60">
@@ -589,7 +974,7 @@
           <blockquote class="text-charcoal/80 leading-relaxed italic">
             "Mesha is amazing! So kind and professional! Such strength in those small hands."
           </blockquote>
-          <figcaption class="mt-5 font-semibold text-sage-dk">— Stacey R. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
+          <figcaption class="mt-5 font-semibold text-plum-dk">— Stacey R. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
         </figure>
 
         <figure class="reveal tilt bg-white rounded-3xl p-7 shadow-sm ring-1 ring-beige/60">
@@ -597,14 +982,14 @@
           <blockquote class="text-charcoal/80 leading-relaxed italic">
             "I've been seeing her for years now. And worth every penny."
           </blockquote>
-          <figcaption class="mt-5 font-semibold text-sage-dk">— Crystal R. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
+          <figcaption class="mt-5 font-semibold text-plum-dk">— Crystal R. <span class="text-charcoal/40 text-sm font-normal">· Verified client</span></figcaption>
         </figure>
       </div>
     </div>
   </section>
 
   <!-- ================= BOOKING (CAL.COM PLACEHOLDER) ================= -->
-  <section id="booking" class="py-20 sm:py-28 bg-sage text-white">
+  <section id="booking" class="py-20 sm:py-28 bg-plum text-white">
     <div class="max-w-5xl mx-auto px-5">
       <div class="text-center mb-12">
         <p class="uppercase tracking-[0.25em] text-xs font-semibold text-white/80 mb-3 reveal">Ready When You Are</p>
@@ -640,16 +1025,16 @@
           <div class="p-7 border-b md:border-b-0 md:border-r border-beige">
             <p class="text-xs uppercase tracking-widest font-semibold text-charcoal/50 mb-4">1. Choose your service</p>
             <div class="space-y-2" id="mock-services">
-              <button class="w-full text-left rounded-xl px-4 py-3 ring-1 ring-beige hover:ring-sage hover:bg-sage/5 transition-all" data-dur="60 min" data-price="$120">
+              <button class="w-full text-left rounded-xl px-4 py-3 ring-1 ring-beige hover:ring-plum hover:bg-plum/5 transition-all" data-dur="60 min" data-price="$120">
                 <span class="font-semibold block">Swedish Massage</span><span class="text-charcoal/50 text-sm">60 min · $120</span>
               </button>
-              <button class="w-full text-left rounded-xl px-4 py-3 ring-1 ring-beige hover:ring-sage hover:bg-sage/5 transition-all" data-dur="60 min" data-price="$130">
+              <button class="w-full text-left rounded-xl px-4 py-3 ring-1 ring-beige hover:ring-plum hover:bg-plum/5 transition-all" data-dur="60 min" data-price="$130">
                 <span class="font-semibold block">Deep Tissue Massage</span><span class="text-charcoal/50 text-sm">60 min · $130</span>
               </button>
-              <button class="w-full text-left rounded-xl px-4 py-3 ring-1 ring-beige hover:ring-sage hover:bg-sage/5 transition-all" data-dur="80 min" data-price="$180">
+              <button class="w-full text-left rounded-xl px-4 py-3 ring-1 ring-beige hover:ring-plum hover:bg-plum/5 transition-all" data-dur="80 min" data-price="$180">
                 <span class="font-semibold block">Pamper Me Please</span><span class="text-charcoal/50 text-sm">80 min · $180</span>
               </button>
-              <button class="w-full text-left rounded-xl px-4 py-3 ring-1 ring-beige hover:ring-sage hover:bg-sage/5 transition-all" data-dur="150 min" data-price="$295">
+              <button class="w-full text-left rounded-xl px-4 py-3 ring-1 ring-beige hover:ring-plum hover:bg-plum/5 transition-all" data-dur="150 min" data-price="$295">
                 <span class="font-semibold block">The Ultimate Meltdown</span><span class="text-charcoal/50 text-sm">150 min · $295</span>
               </button>
               <p class="text-xs text-charcoal/40 pt-2">…all 15 services will be listed here.</p>
@@ -660,7 +1045,7 @@
           <div class="p-7">
             <p class="text-xs uppercase tracking-widest font-semibold text-charcoal/50 mb-4">2. Pick a time</p>
             <div class="flex items-center justify-between mb-4">
-              <p class="font-serif text-2xl text-sage-dk">July 2026</p>
+              <p class="font-serif text-2xl text-plum-dk">July 2026</p>
               <div class="flex gap-2 text-charcoal/40">
                 <span class="w-8 h-8 rounded-full ring-1 ring-beige flex items-center justify-center hover:bg-beige transition-colors">‹</span>
                 <span class="w-8 h-8 rounded-full ring-1 ring-beige flex items-center justify-center hover:bg-beige transition-colors">›</span>
@@ -675,11 +1060,11 @@
 
             <p class="text-xs uppercase tracking-widest font-semibold text-charcoal/50 mt-6 mb-3">Available times</p>
             <div class="flex flex-wrap gap-2">
-              <span class="rounded-lg px-3 py-2 text-sm ring-1 ring-beige hover:bg-sage hover:text-white hover:ring-sage transition-all">11:00 AM</span>
-              <span class="rounded-lg px-3 py-2 text-sm ring-1 ring-beige hover:bg-sage hover:text-white hover:ring-sage transition-all">12:30 PM</span>
-              <span class="rounded-lg px-3 py-2 text-sm ring-1 ring-beige hover:bg-sage hover:text-white hover:ring-sage transition-all">2:00 PM</span>
-              <span class="rounded-lg px-3 py-2 text-sm ring-1 ring-beige hover:bg-sage hover:text-white hover:ring-sage transition-all">3:30 PM</span>
-              <span class="rounded-lg px-3 py-2 text-sm ring-1 ring-beige hover:bg-sage hover:text-white hover:ring-sage transition-all">5:00 PM</span>
+              <span class="rounded-lg px-3 py-2 text-sm ring-1 ring-beige hover:bg-plum hover:text-white hover:ring-plum transition-all">11:00 AM</span>
+              <span class="rounded-lg px-3 py-2 text-sm ring-1 ring-beige hover:bg-plum hover:text-white hover:ring-plum transition-all">12:30 PM</span>
+              <span class="rounded-lg px-3 py-2 text-sm ring-1 ring-beige hover:bg-plum hover:text-white hover:ring-plum transition-all">2:00 PM</span>
+              <span class="rounded-lg px-3 py-2 text-sm ring-1 ring-beige hover:bg-plum hover:text-white hover:ring-plum transition-all">3:30 PM</span>
+              <span class="rounded-lg px-3 py-2 text-sm ring-1 ring-beige hover:bg-plum hover:text-white hover:ring-plum transition-all">5:00 PM</span>
             </div>
 
             <!-- STRIPE — checkout / deposit step -->
@@ -709,19 +1094,31 @@
     <div class="max-w-5xl mx-auto px-5 grid gap-10 lg:grid-cols-2 items-center">
       <div>
         <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3 reveal">Give the Gift of Calm</p>
-        <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk mb-5 reveal">Gift Certificates</h2>
+        <h2 class="font-serif text-4xl sm:text-5xl text-plum-dk mb-5 reveal">Gift Certificates</h2>
         <p class="text-charcoal/75 leading-relaxed mb-6 reveal">
           Birthdays, new moms, the person who never slows down. Buy a gift certificate online,
           delivered by email the moment it's purchased — redeemable toward any service.
         </p>
-        <!-- STRIPE — gift card checkout will hook in here. -->
-        <div class="flex flex-wrap gap-3 reveal">
-          <button class="btn rounded-full bg-white ring-1 ring-beige hover:ring-sage px-6 py-3 font-semibold">$70</button>
-          <button class="btn rounded-full bg-white ring-1 ring-beige hover:ring-sage px-6 py-3 font-semibold">$120</button>
-          <button class="btn rounded-full bg-white ring-1 ring-beige hover:ring-sage px-6 py-3 font-semibold">$180</button>
-          <button class="btn rounded-full bg-white ring-1 ring-beige hover:ring-sage px-6 py-3 font-semibold">Custom</button>
+        <!-- STRIPE — gift card checkout will hook in here.
+             No preset denominations by request: the buyer types any amount. -->
+        <div class="reveal">
+          <label for="gift-amount" class="block text-sm font-semibold text-charcoal/75 mb-2">
+            Choose your amount
+          </label>
+          <div class="relative max-w-[16rem]">
+            <span class="absolute left-5 top-1/2 -translate-y-1/2 text-2xl font-semibold text-charcoal/35 pointer-events-none">$</span>
+            <input id="gift-amount" type="number" inputmode="decimal" min="10" max="2000" step="5"
+                   placeholder="120" autocomplete="off"
+                   aria-describedby="gift-hint"
+                   class="w-full rounded-2xl bg-white ring-1 ring-beige focus:ring-2 focus:ring-plum
+                          outline-none pl-11 pr-5 py-4 text-2xl font-semibold text-charcoal
+                          placeholder:text-charcoal/25 transition-shadow" />
+          </div>
+          <p id="gift-hint" class="text-xs text-charcoal/45 mt-2">
+            Any amount from $10 to $2,000 — she'll apply it to whatever they book.
+          </p>
         </div>
-        <button class="btn mt-6 rounded-full bg-terracotta hover:bg-[#b56b4d] text-white font-semibold px-8 py-3.5 shadow-lg reveal">
+        <button id="gift-buy" class="btn mt-6 rounded-full bg-terracotta hover:bg-[#b56b4d] text-white font-semibold px-8 py-3.5 shadow-lg reveal">
           Buy a Gift Certificate
         </button>
         <p class="text-xs text-charcoal/45 mt-3 reveal">Checkout powered by Stripe — being set up.</p>
@@ -731,7 +1128,7 @@
         <p class="uppercase tracking-[0.25em] text-xs text-terracotta font-semibold mb-2">Gift Certificate</p>
         <p class="font-serif text-3xl mb-1">Essential Massage</p>
         <p class="text-cream/60 text-sm mb-8">by Mesha · Bolingbrook, IL</p>
-        <p class="font-serif text-6xl text-terracotta mb-2">$120</p>
+        <p id="gift-preview" class="font-serif text-6xl text-terracotta mb-2">$120</p>
         <p class="text-cream/60 text-sm">Redeemable toward any service</p>
       </div>
     </div>
@@ -742,7 +1139,7 @@
     <div class="max-w-6xl mx-auto px-5">
       <div class="text-center max-w-2xl mx-auto mb-14">
         <p class="uppercase tracking-[0.25em] text-xs font-semibold text-terracotta mb-3 reveal">Come See Us</p>
-        <h2 class="font-serif text-4xl sm:text-5xl text-sage-dk reveal">Hours &amp; Location</h2>
+        <h2 class="font-serif text-4xl sm:text-5xl text-plum-dk reveal">Hours &amp; Location</h2>
       </div>
 
       <div class="grid gap-7 lg:grid-cols-3">
@@ -774,7 +1171,7 @@
         </div>
 
         <!-- Contact -->
-        <div class="reveal tilt bg-sage text-white rounded-3xl p-7 shadow-sm flex flex-col">
+        <div class="reveal tilt bg-plum text-white rounded-3xl p-7 shadow-sm flex flex-col">
           <p class="uppercase tracking-widest text-xs font-semibold text-white/70 mb-5">Get in Touch</p>
           <a href="tel:+13312333613" class="font-serif text-3xl hover:text-terracotta transition-colors mb-1">(331) 233-3613</a>
           <p class="text-white/70 text-sm mb-6">Call or text — Mesha answers.</p>
@@ -782,7 +1179,7 @@
           <a href="mailto:hello@essentialmassagebymesha.com" class="text-sm font-semibold hover:underline break-words mb-6">
             hello@essentialmassagebymesha.com
           </a>
-          <a href="#booking" class="btn mt-auto rounded-full bg-white text-sage-dk font-semibold px-6 py-3 text-center">
+          <a href="#booking" class="btn mt-auto rounded-full bg-white text-plum-dk font-semibold px-6 py-3 text-center">
             Book Online
           </a>
         </div>
@@ -794,6 +1191,7 @@
   <footer class="bg-charcoal text-cream/80 pt-14 pb-8">
     <div class="max-w-6xl mx-auto px-5 grid gap-10 sm:grid-cols-3">
       <div>
+        <img src="assets/lotus.svg" alt="" aria-hidden="true" class="h-11 w-auto mb-4" />
         <p class="font-serif text-2xl text-cream mb-1">Essential Massage</p>
         <p class="uppercase tracking-[0.25em] text-xs text-terracotta font-semibold mb-4">by Mesha</p>
         <p class="text-sm leading-relaxed text-cream/60">
@@ -808,6 +1206,7 @@
         <p class="font-semibold text-cream mb-4">Quick Links</p>
         <ul class="space-y-2 text-sm">
           <li><a href="#services" class="hover:text-terracotta transition-colors">Services &amp; Pricing</a></li>
+          <li><a href="#packages" class="hover:text-terracotta transition-colors">Packages &amp; Series</a></li>
           <li><a href="#about"    class="hover:text-terracotta transition-colors">About Mesha</a></li>
           <li><a href="#reviews"  class="hover:text-terracotta transition-colors">Reviews</a></li>
           <li><a href="#gift"     class="hover:text-terracotta transition-colors">Gift Certificates</a></li>
@@ -846,6 +1245,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- Lightbox for the studio gallery -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged studio photo">
+    <button type="button" id="lightbox-close" aria-label="Close photo">&times;</button>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
 
   <script>
     /* ---------------- Custom cursor ---------------- */
@@ -900,6 +1305,124 @@
       });
     })();
 
+    /* ---------------- Decorative background video: respect reduced motion ---------------- */
+    (function () {
+      const vids = document.querySelectorAll('video[data-ambient]');
+      if (!vids.length) return;
+      const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      vids.forEach(v => {
+        if (still) {
+          v.removeAttribute('autoplay');
+          v.pause();          // the poster frame stands in for the loop
+        } else {
+          // Some browsers hold off autoplay until the file is ready; nudge it once.
+          v.play().catch(() => {});
+        }
+      });
+    })();
+
+    /* ---------------- Welcome video: click-to-play overlay ---------------- */
+    (function () {
+      const video = document.getElementById('welcome-video');
+      const overlay = document.getElementById('welcome-play');
+      if (!video || !overlay) return;
+
+      overlay.addEventListener('click', () => {
+        overlay.classList.add('hidden');
+        video.setAttribute('controls', '');
+        video.play().catch(() => {});
+      });
+      // When it finishes, put the cover back so it reads as a poster again.
+      video.addEventListener('ended', () => {
+        video.removeAttribute('controls');
+        overlay.classList.remove('hidden');
+      });
+    })();
+
+    /* ---------------- Gift certificate: custom amount ---------------- */
+    (function () {
+      const input = document.getElementById('gift-amount');
+      const preview = document.getElementById('gift-preview');
+      const hint = document.getElementById('gift-hint');
+      const buy = document.getElementById('gift-buy');
+      if (!input || !preview) return;
+
+      const MIN = 10, MAX = 2000;
+      const DEFAULT_HINT = hint.textContent;
+      const money = n => '$' + n.toLocaleString('en-US');
+
+      function sync() {
+        const raw = input.value.trim();
+
+        // Empty field falls back to the placeholder amount on the card.
+        if (raw === '') {
+          preview.textContent = money(120);
+          hint.textContent = DEFAULT_HINT;
+          hint.classList.remove('text-terracotta');
+          buy.disabled = false;
+          buy.classList.remove('opacity-50', 'pointer-events-none');
+          return;
+        }
+
+        const n = Math.floor(Number(raw));
+        const valid = Number.isFinite(n) && n >= MIN && n <= MAX;
+
+        preview.textContent = valid ? money(n) : '—';
+        hint.textContent = valid
+          ? DEFAULT_HINT
+          : `Please enter an amount between ${money(MIN)} and ${money(MAX)}.`;
+        hint.classList.toggle('text-terracotta', !valid);
+        buy.disabled = !valid;
+        buy.classList.toggle('opacity-50', !valid);
+        buy.classList.toggle('pointer-events-none', !valid);
+      }
+
+      input.addEventListener('input', sync);
+      input.addEventListener('change', sync);
+      sync();
+    })();
+
+    /* ---------------- Studio gallery lightbox ---------------- */
+    (function () {
+      const box = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      const shots = document.querySelectorAll('.shot[data-full]');
+      if (!box || !shots.length) return;
+
+      let lastFocused = null;
+
+      function open(src, alt) {
+        lastFocused = document.activeElement;
+        img.src = src;
+        img.alt = alt;
+        box.classList.add('open');
+        requestAnimationFrame(() => box.classList.add('shown'));
+        document.body.style.overflow = 'hidden';
+        document.getElementById('lightbox-close').focus();
+      }
+
+      function close() {
+        box.classList.remove('shown');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          box.classList.remove('open');
+          img.src = '';
+        }, 300);
+        if (lastFocused) lastFocused.focus();
+      }
+
+      shots.forEach(s => s.addEventListener('click', () => {
+        const inner = s.querySelector('img');
+        open(s.dataset.full, inner ? inner.alt : '');
+      }));
+
+      document.getElementById('lightbox-close').addEventListener('click', close);
+      box.addEventListener('click', e => { if (e.target === box) close(); });
+      addEventListener('keydown', e => {
+        if (e.key === 'Escape' && box.classList.contains('open')) close();
+      });
+    })();
+
     /* ---------------- Card tilt + sheen that tracks the mouse ---------------- */
     (function () {
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -944,9 +1467,15 @@
         nav.classList.toggle('shadow-md', scrollY > 20);
         nav.classList.toggle('bg-cream/95', scrollY > 20);
 
+        // Pick the lowest section that starts above the fold line. Comparing
+        // offsetTop rather than trusting array order means the nav can list
+        // links in any order without breaking the highlight.
         const y = scrollY + 140;
-        let current = null;
-        sections.forEach(s => { if (s.offsetTop <= y) current = s.id; });
+        let current = null, best = -1;
+        sections.forEach(s => {
+          const top = s.offsetTop;
+          if (top <= y && top > best) { best = top; current = s.id; }
+        });
         links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
       }, { passive: true });
     })();
@@ -959,10 +1488,10 @@
       buttons.forEach(btn => btn.addEventListener('click', () => {
         buttons.forEach(b => {
           b.className = b.className
-            .replace('bg-sage text-white', 'bg-white ring-1 ring-beige text-charcoal/75 hover:bg-beige');
+            .replace('bg-plum text-white', 'bg-white ring-1 ring-beige text-charcoal/75 hover:bg-beige');
         });
         btn.className = btn.className
-          .replace('bg-white ring-1 ring-beige text-charcoal/75 hover:bg-beige', 'bg-sage text-white');
+          .replace('bg-white ring-1 ring-beige text-charcoal/75 hover:bg-beige', 'bg-plum text-white');
 
         const f = btn.dataset.filter;
         cards.forEach(c => {
@@ -988,7 +1517,7 @@
         const closed = dow === 2 || dow === 4; // Tue & Thu
         const cls = closed
           ? 'text-charcoal/25 py-1.5 rounded-lg'
-          : 'py-1.5 rounded-lg ring-1 ring-beige hover:bg-sage hover:text-white hover:ring-sage transition-all';
+          : 'py-1.5 rounded-lg ring-1 ring-beige hover:bg-plum hover:text-white hover:ring-plum transition-all';
         grid.insertAdjacentHTML('beforeend', `<span class="${cls}">${d}</span>`);
       }
     })();
@@ -997,8 +1526,8 @@
     (function () {
       const opts = document.querySelectorAll('#mock-services button');
       opts.forEach(o => o.addEventListener('click', () => {
-        opts.forEach(x => x.classList.remove('ring-sage', 'bg-sage/10'));
-        o.classList.add('ring-sage', 'bg-sage/10');
+        opts.forEach(x => x.classList.remove('ring-plum', 'bg-plum/10'));
+        o.classList.add('ring-plum', 'bg-plum/10');
       }));
     })();
   </script>

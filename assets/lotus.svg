@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-80 -106 160 126" role="img" aria-label="Essential Massage by Mesha lotus mark">
+  <title>Essential Massage by Mesha</title>
+  <g fill="#29ABE2">
+    <path d="M0 0C-31 -22 -31 -52 0 -72C31 -52 31 -22 0 0Z" transform="rotate(-79)"/>
+    <path d="M0 0C-31 -22 -31 -52 0 -72C31 -52 31 -22 0 0Z" transform="rotate(79)"/>
+    <path d="M0 0C-27 -26 -27 -62 0 -86C27 -62 27 -26 0 0Z" transform="rotate(-42)"/>
+    <path d="M0 0C-27 -26 -27 -62 0 -86C27 -62 27 -26 0 0Z" transform="rotate(42)"/>
+    <path d="M0 0C-30 -30 -30 -72 0 -100C30 -72 30 -30 0 0Z"/>
+  </g>
+</svg>
