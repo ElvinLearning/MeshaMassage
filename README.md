@@ -62,6 +62,9 @@ Fonts: **Fraunces** (soft variable serif — headings) and **Plus Jakarta Sans**
 from Google Fonts. Icons are a hand-drawn inline SVG sprite at the top of `<body>` —
 **no emoji anywhere**, one line icon per service.
 
+**Copy style:** no em dashes anywhere in site copy, meta or alt text (client preference).
+Use a period, comma or colon instead; time ranges read "10:00 AM to 7:00 PM".
+
 ### Palette
 
 Blue-violet family (Mesha asked for purple in Jul 2026), brightened in the Sep 2026
@@ -103,8 +106,14 @@ All in `assets/js/site.js`, progressive — the page reads fine with JS off:
   View Transitions API where supported
 - Click-to-play welcome video; the promo loop only plays while on screen
 - Gallery lightbox on native `<dialog>` — arrows/keys/swipe, `Esc` to close
-- Sticky header, mobile menu, and a mobile **Call / Text / Book** bar that slides in
-  after the hero and steps aside while the booking form is on screen
+- **Booking is hard to miss:** a "Book an appointment" card in the hero (pick a service,
+  then "Pick a time" jumps to the form with it preselected), the booking section placed
+  straight after Services and Packages, a floating **Book appointment** button on
+  desktop and a **Call / Text / Book** bar on phones. Both slide in after the hero and
+  step aside over the booking form and the footer
+- Booking steps tick off with a checkmark as they're completed, and "Request
+  appointment" won't send until a service is chosen
+- Sticky header and full-screen mobile menu
 - Scroll reveals, cursor spotlight on cards, CSS scroll-progress bar
 
 No custom cursor any more: hiding the real cursor costs usability on a page whose job
@@ -119,13 +128,13 @@ block in `<head>`.
 
 | Event | Fired by | Meta standard event |
 |---|---|---|
-| `book_request` | "Send request by text" | `Lead` |
+| `book_request` | "Request appointment" | `Lead` |
 | `gift_request` | Gift "Request by text" | `Lead` |
 | `call_click` | any `tel:` link | `Contact` |
 | `text_click` | any `sms:` link | `Contact` |
-| `book_intent` | Book buttons / service "Book" links | — |
-| `directions_click` | Directions | — |
-| `video_play`, `book_copy` | welcome video, Copy | — |
+| `book_intent` | Book buttons, hero quick-book, service "Book" links | none |
+| `directions_click` | Directions | none |
+| `video_play`, `book_copy` | welcome video, Copy | none |
 
 Booking texts end with "(Sent from your website)" so Mesha can tell which leads came
 from the site.

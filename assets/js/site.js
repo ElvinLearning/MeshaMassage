@@ -1,5 +1,5 @@
 /* =====================================================================
-   Essential Massage by Mesha — site behaviour
+   Essential Massage by Mesha: site behaviour
    Vanilla JS, no dependencies. Every feature is progressive: the page
    reads and works without this file; this adds the polish and the
    booking / gift request flows.
@@ -33,7 +33,7 @@
   /* ---------------------------------------------------------------
      Analytics / ad-conversion hooks.
      Pushes to dataLayer (GTM / GA4), gtag() and Meta fbq() if those
-     tags have been installed — otherwise it is a harmless no-op.
+     tags have been installed; otherwise it is a harmless no-op.
      --------------------------------------------------------------- */
   window.dataLayer = window.dataLayer || [];
   function track(event, params = {}) {
@@ -106,6 +106,7 @@
   const hero = $('#top');
   const mbar = $('#mbar');
   const bookSection = $('#booking');
+  const footer = $('.footer');
   function onScroll() {
     const y = window.scrollY;
     header.classList.toggle('is-scrolled', y > 8);
@@ -113,7 +114,9 @@
       // Step aside while the booking form is on screen so it never covers "Send request".
       const b = bookSection ? bookSection.getBoundingClientRect() : null;
       const inBooking = b && b.top < innerHeight * 0.8 && b.bottom > innerHeight * 0.2;
-      mbar.classList.toggle('is-visible', y > hero.offsetHeight * 0.55 && !inBooking);
+      const f = footer ? footer.getBoundingClientRect() : null;
+      const atFooter = f && f.top < innerHeight - 40;
+      mbar.classList.toggle('is-visible', y > hero.offsetHeight * 0.55 && !inBooking && !atFooter);
     }
   }
   addEventListener('scroll', onScroll, { passive: true });
@@ -258,6 +261,8 @@
     const sendBtn = $('#book-send');
     const copyBtn = $('#book-copy');
     const summary = $('#book-summary');
+    const bookError = $('#book-error');
+    const steps = $$('.book-step', form);
     const out = {
       service: $('#sum-service'), dur: $('#sum-dur'), day: $('#sum-day'),
       time: $('#sum-time'), price: $('#sum-price')
@@ -296,6 +301,13 @@
       });
       select.append(group);
     });
+
+    const quick = $('#qb-service');
+    if (quick) {
+      [...select.querySelectorAll('optgroup')].forEach(g => quick.append(g.cloneNode(true)));
+      $('#qb-go').addEventListener('click', () => { if (quick.value) choose(quick.value); });
+      quick.addEventListener('change', () => { if (quick.value) $('#qb-go').focus({ preventScroll: true }); });
+    }
 
     const state = { date: null, time: null };
     const view = { y: NOW.y, m: NOW.m };
@@ -353,7 +365,7 @@
       const note = text => { const p = document.createElement('p'); p.className = 'times-empty'; p.textContent = text; timesEl.append(p); };
       if (!state.date) return note('Pick a day to see start times.');
       const slots = slotsFor(state.date.y, state.date.m, state.date.d);
-      if (!slots.length) return note('No start times left that day for this service — try another day.');
+      if (!slots.length) return note('No start times left that day for this service. Try another day.');
       if (state.time !== null && !slots.includes(state.time)) state.time = null;
       slots.forEach(t => {
         const btn = document.createElement('button');
@@ -387,11 +399,14 @@
     function update() {
       const o = current();
       setOut(out.service, o ? (o.qty ? `${o.name} series` : o.name) : '', 'Not chosen yet');
-      setOut(out.dur, o ? (o.qty ? `${o.qty} × ${o.mins} min` : `${o.mins} min`) : '', '—');
-      setOut(out.day, state.date ? dayLabel(state.date) : '', '—');
-      setOut(out.time, state.time !== null ? hourLabel(state.time, true) : '', '—');
-      setOut(out.price, o ? money(o.price) : '', '—');
+      setOut(out.dur, o ? (o.qty ? `${o.qty} × ${o.mins} min` : `${o.mins} min`) : '', 'Not chosen');
+      setOut(out.day, state.date ? dayLabel(state.date) : '', 'Not chosen');
+      setOut(out.time, state.time !== null ? hourLabel(state.time, true) : '', 'Not chosen');
+      setOut(out.price, o ? money(o.price) : '', 'Not chosen');
       sendBtn.href = smsHref(message());
+      steps[0]?.classList.toggle('is-done', !!o);
+      steps[1]?.classList.toggle('is-done', !!state.date && state.time !== null);
+      steps[2]?.classList.toggle('is-done', nameInput.value.trim().length > 1);
     }
 
     function choose(id) {
@@ -403,7 +418,19 @@
       summary.classList.add('flash');
     }
 
-    select.addEventListener('change', () => { renderCalendar(); renderTimes(); update(); });
+    select.addEventListener('change', () => {
+      select.classList.remove('is-invalid');
+      bookError.hidden = true;
+      renderCalendar(); renderTimes(); update();
+    });
+    sendBtn.addEventListener('click', e => {
+      if (current()) return;
+      e.preventDefault();
+      e.stopPropagation();          // not a real lead, so don't fire the conversion
+      select.classList.add('is-invalid');
+      bookError.hidden = false;
+      select.focus();
+    });
     nameInput.addEventListener('input', update);
     calPrev.addEventListener('click', () => { view.m--; if (view.m < 0) { view.m = 11; view.y--; } renderCalendar(); });
     calNext.addEventListener('click', () => { view.m++; if (view.m > 11) { view.m = 0; view.y++; } renderCalendar(); });
@@ -446,8 +473,8 @@
       }
     });
 
-    // Late in the month there may be only a day or two left to pick from —
-    // open on next month instead so the calendar isn't a wall of greyed-out days.
+    // Late in the month there may be only a day or two left to pick from.
+    // Open on next month instead so the calendar isn't a wall of greyed-out days.
     const lastDay = new Date(NOW.y, NOW.m + 1, 0).getDate();
     let openDays = 0;
     for (let d = NOW.d; d <= lastDay; d++) if (slotsFor(NOW.y, NOW.m, d).length) openDays++;
@@ -478,7 +505,7 @@
       amount.setAttribute('aria-invalid', String(!valid));
       hint.classList.toggle('is-error', !valid);
       hint.textContent = valid ? 'Any amount from $10 to $2,000.'
-        : n < MIN ? 'The minimum is $10.' : 'The maximum online is $2,000 — text Mesha for larger amounts.';
+        : n < MIN ? 'The minimum is $10.' : 'The maximum online is $2,000. Text Mesha for larger amounts.';
 
       const who = forInput.value.trim();
       forPreview.textContent = who ? `For ${who}` : 'For someone special';
