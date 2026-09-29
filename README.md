@@ -35,69 +35,109 @@ Migration path once she's on board:
 - **Phone:** (331) 233-3613
 - **Rating:** 5.0 across 45+ verified reviews
 - **Clientele:** Everyone — gender-inclusive, all ages and bodies welcome
-- **Vibe:** Calm spa aesthetic — dusty plum, soft neutrals, generous whitespace
+- **Vibe:** Calm, bright spa aesthetic — periwinkle-to-violet on airy lavender-white, deep indigo accents
 
 ---
 
 ## Tech Stack
 
-Single self-contained HTML file. **No build step** — just open `index.html` or host it as-is.
+Hand-written HTML, CSS and JS. **No framework, no build step** — host the folder as-is
+(GitHub Pages today). The Tailwind CDN script from the earlier mockup is gone: Tailwind
+itself says not to use it in production, it compiled the page in the visitor's browser,
+and it delayed first paint — the wrong trade for a page that ad clicks will land on.
 
 | File | Purpose |
 |---|---|
-| `index.html` | The entire one-page site (Tailwind via CDN + inline styles/JS) |
-| `assets/lotus.svg` | Her lotus mark, redrawn as vector — nav, footer, favicon |
-| `assets/photos/` | 11 stills from her own shoot (hero, About, studio gallery, share card) |
+| `index.html` | All content + SEO meta, Open Graph, JSON-LD, the inline SVG icon sprite |
+| `assets/css/site.css` | All styles. Design tokens live in `:root` at the top |
+| `assets/js/site.js` | All behaviour (vanilla, no dependencies, ~20 KB unminified) |
+| `assets/lotus.svg` | Her lotus mark, redrawn as vector — favicon |
+| `assets/apple-touch-icon.png` | Home-screen icon (white lotus on the brand gradient) |
+| `assets/photos/` | 11 stills from her own shoot + `og-share.jpg`, the branded share card |
 | `assets/video/` | Her two clips, transcoded for web, plus poster frames |
 | `assets/cozy-digital-logo.jpg` | Cozy Digital logo used in the footer |
 | `OUTREACH-DRAFT.md` | Draft text + email to send Mesha (not sent — we lack her email) |
 
-Styling uses [Tailwind CSS](https://tailwindcss.com) loaded from the CDN. The palette is
-defined in the `tailwind.config` block near the top of `index.html` — change those hex
-values to restyle the whole site.
+Fonts: **Fraunces** (soft variable serif — headings) and **Plus Jakarta Sans** (body),
+from Google Fonts. Icons are a hand-drawn inline SVG sprite at the top of `<body>` —
+**no emoji anywhere**, one line icon per service.
 
 ### Palette
 
-Mesha asked for a more purple aesthetic (Jul 2026). The original sage green is gone;
-the token was **renamed `sage` → `plum`** rather than left pointing at a purple value.
+Blue-violet family (Mesha asked for purple in Jul 2026), brightened in the Sep 2026
+redesign — the dusty plum read dull and flat. Every value is a CSS custom property in
+`:root` in `site.css`; change them there and the whole site follows.
 
 | Token | Hex | Role |
 |---|---|---|
-| `plum` | `#7c6a92` | primary — buttons, headings, filter pills |
-| `plum-dk` | `#63527a` | hover state |
-| `terracotta` | `#c67b5c` | accent — eyebrows, CTA, stars *(deliberately kept warm)* |
-| `cream` | `#faf7f4` | page background |
-| `beige` | `#ede6ec` | soft sections / cards |
-| `charcoal` | `#3a3440` | body text, dark sections |
+| `--primary` | `#5b5cf0` | periwinkle — links, focus rings, active states |
+| `--grad` | `#4f63ee → #6a55f0 → #8e4fea` | buttons, badges, highlights (white text passes WCAG AA) |
+| `--bg` | `#f7f6ff` | airy lavender-white page |
+| `--bg-tint` | `#efedff` | tinted panels |
+| `--ink` | `#1b1a3a` | deep indigo text |
+| `--deep` | `#131236` | dark sections (studio, booking, footer) |
+| `--lotus` | `#29abe2` | **her mark** — header, footer, seal, share card |
+| `--star` | `#f2b33d` | review stars only |
 
-Two notes for whoever picks this up:
-
-- A handful of `rgba()` values in the inline `<style>` block mirror these tokens
-  (cursor ring, card/button shadows, lightbox backdrop). They are **not** driven by
-  the Tailwind config — if you change the palette again, sweep those too.
-- **Her lotus stays cyan (`#29ABE2`).** It's her actual brand mark, so it wasn't
-  recoloured to match; violet and cyan sit fine together and it now reads as a pop
-  accent. If she wants the mark itself purple, that's her call to make.
+**Her lotus stays cyan (`#29ABE2`)** wherever it's acting as her logo. It's her actual
+brand mark, so it isn't recoloured to the palette; decorative lotus motifs (marquee
+separators, watermarks) use the gradient or white.
 
 ### Interaction layer
 
-All vanilla JS at the bottom of `index.html`, no dependencies:
+All in `assets/js/site.js`, progressive — the page reads fine with JS off:
 
-- Custom cursor — dot plus a ring that lags behind and swells over anything clickable
-- Hero parallax and a warm light that follows the mouse
-- Card tilt with a sheen that tracks the cursor across each card
-- Scroll reveal with staggered delays (IntersectionObserver)
-- Sticky nav that shrinks and highlights the current section — the highlight compares
-  `offsetTop` rather than trusting nav order, so nav links and page sections can be
-  ordered independently (they currently are: **Studio sits first on the page** but
-  fourth in the menu)
-- Service category filter (All / Massage / Recovery & Wellness / Body Sculpting)
-- Click-to-play welcome video (native controls only appear once you press play)
-- Studio gallery lightbox — click any photo, `Esc` or backdrop-click to close
+- **Live open/closed status** computed in Bolingbrook time (`America/Chicago`), shown
+  in the hero and the hours card, with today's row highlighted
+- **Booking request** — pick a service, a day, a preferred start time and your name;
+  the site builds a text message to Mesha and opens the phone's SMS app. The service
+  list is read from the service/package cards, so prices live in one place. Closed days
+  (Tue/Thu) and times that wouldn't fit the service before closing are disabled; late in
+  a month the calendar opens on next month. On desktop, **Copy** puts the message on the
+  clipboard
+- "Book" on any service card, or "Book this series" on a package, preselects it in the form
+- **Selectable series tiers** with savings bars
+- **Gift certificate** — custom amount ($10–$2,000, by her request) and an optional
+  recipient name, both mirrored live on the card; the request goes out by text
+- Service filter — segmented control with a sliding thumb, animated with the
+  View Transitions API where supported
+- Click-to-play welcome video; the promo loop only plays while on screen
+- Gallery lightbox on native `<dialog>` — arrows/keys/swipe, `Esc` to close
+- Sticky header, mobile menu, and a mobile **Call / Text / Book** bar that slides in
+  after the hero and steps aside while the booking form is on screen
+- Scroll reveals, cursor spotlight on cards, CSS scroll-progress bar
 
-Everything degrades: the custom cursor is hidden on touch devices, and all motion is
-disabled under `prefers-reduced-motion` — including the looping video, which falls back
-to its poster frame.
+No custom cursor any more: hiding the real cursor costs usability on a page whose job
+is getting clicks. All motion switches off under `prefers-reduced-motion`.
+
+### Ads & analytics hooks
+
+Every conversion-worthy click carries a `data-track` attribute, and `site.js` forwards
+it to `dataLayer` (GTM / GA4), `gtag()` and Meta's `fbq()` **when those tags are
+installed** — until then it's a no-op. Paste the tags in the marked `ADS & ANALYTICS`
+block in `<head>`.
+
+| Event | Fired by | Meta standard event |
+|---|---|---|
+| `book_request` | "Send request by text" | `Lead` |
+| `gift_request` | Gift "Request by text" | `Lead` |
+| `call_click` | any `tel:` link | `Contact` |
+| `text_click` | any `sms:` link | `Contact` |
+| `book_intent` | Book buttons / service "Book" links | — |
+| `directions_click` | Directions | — |
+| `video_play`, `book_copy` | welcome video, Copy | — |
+
+Booking texts end with "(Sent from your website)" so Mesha can tell which leads came
+from the site.
+
+### SEO
+
+- Title/description written for "massage Bolingbrook IL"
+- `HealthAndBeautyBusiness` JSON-LD: address, phone, hours, and all 16 priced offers
+- Review stars are **deliberately not** marked up — Google disallows self-served review
+  rich results for a business's own site
+- Open Graph / Twitter card with a branded 1200×630 share image
+- Semantic landmarks, one `h1`, labelled sections, alt text on every photo
 
 ---
 
@@ -110,20 +150,21 @@ Sources live outside the repo; only the web-optimised derivatives are committed.
 
 | Where | Asset | From |
 |---|---|---|
-| Hero background | `photos/hero-studio.jpg` | `EWF_5787` |
+| Hero (arch) | `photos/mesha-portrait.jpg` | `EWF_5699` |
+| Hero (inset circle) | `photos/hero-studio.jpg` | `EWF_5787` |
 | Quote band (looping) | `video/promo-loop.mp4` | `Promo cover.mov`, first 13s |
-| About | `photos/mesha-portrait.jpg` | `EWF_5699` |
+| About | `photos/mesha-working.jpg` | assorted |
 | Studio video | `video/welcome.mp4` | `Welcome.mov` |
 | Studio gallery | 9 stills in `photos/` | assorted |
-| Social share card | `photos/og-share.jpg` | `EWF_5787` |
+| Social share card | `photos/og-share.jpg` | `EWF_5787` + brand panel, rendered 1200×630 |
 
 Two deliberate calls worth knowing about:
 
 1. **The hero is a still, not the promo video.** The promo b-roll is all extreme
    close-ups of skin. Full-bleed at 92vh that reads ambiguously, which is the last
    thing a massage therapist's homepage should do. It runs in the shallow quote band
-   instead, at 80% darkness, where it reads as warm texture. The hero is the wide shot
-   of Mesha working in her room — therapist, uniform, real clinical space.
+   instead, heavily tinted, where it reads as warm texture. The hero is Mesha at work in
+   an arch frame, with the wide shot of her room inset — therapist, uniform, real space.
 2. **The promo loop is trimmed to 13 seconds.** Her title card fades in around 0:14
    and would collide with the on-page headline.
 
@@ -219,20 +260,19 @@ Flagged while adding the above. **None were silently "fixed".**
   Deep tissue and prenatal are both $130. The card deliberately says only "Single
   session $120" rather than guessing which modalities are included.
 
-### Placeholders — deliberate, for the next meeting
+### Booking & payments — what works today vs next
 
-- [ ] **Cal.com booking** — the calendar in the Book section is a static preview of the
-      real flow. Search `CAL.COM` in `index.html` for the swap-in spot.
-- [ ] **Stripe payments** — deposit at booking + gift certificate checkout.
-      Search `STRIPE` in `index.html`.
-      Gift certificates are **custom-amount only** by her request — no preset
-      denominations. The buyer types any amount from $10–$2,000 and the preview card
-      updates live; `#gift-buy` is disabled while the amount is out of range. Stripe
-      needs to read `#gift-amount` rather than a fixed price ID.
-- [ ] **Series checkout** — the 14 packages currently link to the booking section.
-      They'll need prepaid products in Stripe and a session balance to draw down.
+- [x] **Booking works today** by text: the visitor's request (service, day, time, name)
+      lands in Mesha's messages and she confirms personally. No accounts needed.
+- [ ] **Cal.com** — for instant confirmation. Search `CAL.COM` in `index.html` for the
+      swap-in spot (replace the form with the inline embed; one event type per service).
+- [ ] **Stripe** — deposits + gift certificate checkout. Search `STRIPE` in `index.html`.
+      Gift certificates are **custom-amount only** by her request — Stripe needs to read
+      `#gift-amount` rather than a fixed price ID. Until then gift requests go by text.
+- [ ] **Series checkout** — the 14 packages need prepaid products in Stripe and a
+      session balance to draw down. Until then "Book this series" sends a text request.
 
-Both are labeled "coming soon" on the page so nothing reads as live when it isn't.
+Both are labelled "coming soon" on the page so nothing reads as live when it isn't.
 
 ### Still needs Mesha's input
 
@@ -240,14 +280,28 @@ Search `TODO` in `index.html`:
 
 - [x] ~~Real photos~~ — done, her own shoot throughout
 - [ ] Her **logo file** (vector if she has it) + confirm the lotus blue
-- [ ] Her **email address** — not listed publicly, and we don't have it
-- [ ] Confirm exact **Instagram** and **Facebook** URLs
+- [ ] Her **email address** — not listed publicly, and we don't have it. The old
+      placeholder `hello@…` address was **removed** rather than shipped: a dead inbox on
+      a live site loses leads silently.
+- [ ] Confirm exact **Instagram** and **Facebook** URLs — the generic links were removed
+      until we have hers (footer, `TODO` marks the spot)
 - [ ] License # / credentials in the About section, if she wants them shown
 - [ ] Sign-off on which photos are public — they show identifiable clients, and
       we don't know what releases she has
 
+### Going live on her domain (and before ads start)
+
+1. Get **photo sign-off** (above) — this matters more once ads put them in front of strangers
+2. Add a `CNAME` file with her domain and point her DNS at GitHub Pages
+3. Search `DOMAIN` in `index.html` and update the canonical URL, Open Graph URLs and the
+   JSON-LD `@id` / `url` / `image` / `logo` to the new domain
+4. Paste the GA4 / Google Ads and Meta Pixel tags into the `ADS & ANALYTICS` block, then
+   mark `book_request`, `gift_request`, `call_click` and `text_click` as conversions
+5. Point her Google Business Profile website link at the new domain
+6. Add `robots.txt` + `sitemap.xml` at the domain root (not worth it on the
+   `github.io/MeshaMassage/` sub-path — crawlers only read them from the root)
+
 ### Nice to have
 
-- [ ] Connect a custom domain (e.g. `essentialmassagebymesha.com`)
-- [ ] LocalBusiness schema + SEO meta for "massage near me Bolingbrook IL"
 - [ ] Google Business Profile review embed
+- [ ] Self-host the two fonts once the domain is live (drops a third-party connection)
