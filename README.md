@@ -62,6 +62,12 @@ Fonts: **Fraunces** (soft variable serif — headings) and **Plus Jakarta Sans**
 from Google Fonts. Icons are a hand-drawn inline SVG sprite at the top of `<body>` —
 **no emoji anywhere**, one line icon per service.
 
+**No public texting.** Visitors can **call** her number, but nothing on the page invites
+them to text it (to keep her messages free of spam and trolls). Booking copy stays
+channel-neutral: "Mesha gets a ping with your request, and you'll hear back as soon as
+your appointment is confirmed." Under the hood the request is still an SMS from the
+visitor's phone until Cal.com replaces it, which removes texting entirely.
+
 **Copy style:** no em dashes anywhere in site copy, meta or alt text (client preference).
 Use a period, comma or colon instead; time ranges read "10:00 AM to 7:00 PM".
 
@@ -93,15 +99,15 @@ All in `assets/js/site.js`, progressive — the page reads fine with JS off:
 - **Live open/closed status** computed in Bolingbrook time (`America/Chicago`), shown
   in the hero and the hours card, with today's row highlighted
 - **Booking request** — pick a service, a day, a preferred start time and your name;
-  the site builds a text message to Mesha and opens the phone's SMS app. The service
+  "Request appointment" opens the visitor's messages app with the request prefilled
+  to Mesha (the only way it can work with no booking account yet). The service
   list is read from the service/package cards, so prices live in one place. Closed days
   (Tue/Thu) and times that wouldn't fit the service before closing are disabled; late in
-  a month the calendar opens on next month. On desktop, **Copy** puts the message on the
-  clipboard
+  a month the calendar opens on next month
 - "Book" on any service card, or "Book this series" on a package, preselects it in the form
 - **Selectable series tiers** with savings bars
 - **Gift certificate** — custom amount ($10–$2,000, by her request) and an optional
-  recipient name, both mirrored live on the card; the request goes out by text
+  recipient name, both mirrored live on the card; requested the same way as bookings
 - Service filter — segmented control with a sliding thumb, animated with the
   View Transitions API where supported
 - Click-to-play welcome video; the promo loop only plays while on screen
@@ -109,7 +115,7 @@ All in `assets/js/site.js`, progressive — the page reads fine with JS off:
 - **Booking is hard to miss:** a "Book an appointment" card in the hero (pick a service,
   then "Pick a time" jumps to the form with it preselected), the booking section placed
   straight after Services and Packages, a floating **Book appointment** button on
-  desktop and a **Call / Text / Book** bar on phones. Both slide in after the hero and
+  desktop and a **Call / Book** bar on phones. Both slide in after the hero and
   step aside over the booking form and the footer
 - Booking steps tick off with a checkmark as they're completed, and "Request
   appointment" won't send until a service is chosen
@@ -131,10 +137,9 @@ block in `<head>`.
 | `book_request` | "Request appointment" | `Lead` |
 | `gift_request` | Gift "Request by text" | `Lead` |
 | `call_click` | any `tel:` link | `Contact` |
-| `text_click` | any `sms:` link | `Contact` |
 | `book_intent` | Book buttons, hero quick-book, service "Book" links | none |
 | `directions_click` | Directions | none |
-| `video_play`, `book_copy` | welcome video, Copy | none |
+| `video_play` | welcome video | none |
 
 Booking texts end with "(Sent from your website)" so Mesha can tell which leads came
 from the site.
@@ -271,8 +276,11 @@ Flagged while adding the above. **None were silently "fixed".**
 
 ### Booking & payments — what works today vs next
 
-- [x] **Booking works today** by text: the visitor's request (service, day, time, name)
+- [x] **Booking works today**: the visitor's request (service, day, time, name)
       lands in Mesha's messages and she confirms personally. No accounts needed.
+- [ ] **Swap to Cal.com before running ads at scale.** It gives Mesha a real
+      notification + calendar, emails the client when she confirms, and takes texting
+      out of the flow completely.
 - [ ] **Cal.com** — for instant confirmation. Search `CAL.COM` in `index.html` for the
       swap-in spot (replace the form with the inline embed; one event type per service).
 - [ ] **Stripe** — deposits + gift certificate checkout. Search `STRIPE` in `index.html`.
@@ -305,7 +313,7 @@ Search `TODO` in `index.html`:
 3. Search `DOMAIN` in `index.html` and update the canonical URL, Open Graph URLs and the
    JSON-LD `@id` / `url` / `image` / `logo` to the new domain
 4. Paste the GA4 / Google Ads and Meta Pixel tags into the `ADS & ANALYTICS` block, then
-   mark `book_request`, `gift_request`, `call_click` and `text_click` as conversions
+   mark `book_request`, `gift_request` and `call_click` as conversions
 5. Point her Google Business Profile website link at the new domain
 6. Add `robots.txt` + `sitemap.xml` at the domain root (not worth it on the
    `github.io/MeshaMassage/` sub-path — crawlers only read them from the root)

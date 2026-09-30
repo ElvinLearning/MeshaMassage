@@ -18,8 +18,10 @@
 
        - Every service, price, duration and series below is REAL,
          from her own menu. There are intentionally NO MassageBook links.
-       - Booking + gift certificates send a prefilled TEXT to Mesha
-         (works today, no accounts needed). When Cal.com / Stripe are
+       - Booking + gift requests reach Mesha as a prefilled SMS from the
+         visitor's phone (works today, no accounts needed). The copy stays
+         channel-neutral on purpose, and there are no public "text us" links,
+         so her number isn't advertised for texting. When Cal.com / Stripe are
          live, search "CAL.COM" and "STRIPE" for the swap-in spots.
        - Search "TODO" for what we still need from her.
        - Search "DOMAIN" for every URL to update when her custom
@@ -272,7 +274,7 @@
               <span class="float-icon"><svg class="icon"><use href="#i-calendar" /></svg></span>
               <div>
                 <p class="qb-title">Book an appointment</p>
-                <p class="qb-sub">Takes under a minute. Mesha confirms by text.</p>
+                <p class="qb-sub">Takes under a minute. Mesha confirms every appointment personally.</p>
               </div>
             </div>
             <div class="qb-row">
@@ -289,7 +291,7 @@
 
           <p class="hero-call rise" style="--d:4">
             Prefer to talk?
-            <a href="tel:+13312333613" class="link-arrow" data-track="call_click" data-fb="Contact"><svg class="icon"><use href="#i-phone" /></svg> Call or text (331) 233-3613</a>
+            <a href="tel:+13312333613" class="link-arrow" data-track="call_click" data-fb="Contact"><svg class="icon"><use href="#i-phone" /></svg> Call (331) 233-3613</a>
           </p>
 
           <ul class="hero-points rise" style="--d:5">
@@ -554,7 +556,7 @@
 
         <p class="help-line reveal">
           Not sure which is right for you?
-          <a class="link-arrow" href="tel:+13312333613" data-track="call_click" data-fb="Contact">Call or text (331) 233-3613 <svg class="icon"><use href="#i-arrow" /></svg></a>
+          <a class="link-arrow" href="tel:+13312333613" data-track="call_click" data-fb="Contact">Call (331) 233-3613 <svg class="icon"><use href="#i-arrow" /></svg></a>
         </p>
       </div>
     </section>
@@ -689,7 +691,7 @@
             </div>
             <p class="pkg-note">
               Need a different number of sessions, or a series of something not listed here?
-              <a href="sms:+13312333613" data-track="text_click" data-fb="Contact">Text Mesha</a> and she'll put one together.
+              <a href="tel:+13312333613" data-track="call_click" data-fb="Contact">Call Mesha</a> and she'll put one together.
             </p>
             <div class="pkg-foot">
               <p class="pkg-pick" aria-live="polite">Selected: <b>4 sessions &middot; $500</b></p>
@@ -705,8 +707,8 @@
 
     <!-- ================= BOOKING =================
          Works TODAY with zero accounts: the visitor picks a service, a day and
-         a preferred time, and the request goes to Mesha as a prefilled text
-         message. She confirms personally.
+         a preferred time, and the request goes to Mesha (under the hood: a
+         prefilled SMS from the visitor's phone). She confirms personally.
 
          CAL.COM — when her Cal.com account is live, replace the .book-card
          and .summary blocks with the Cal inline embed:
@@ -719,7 +721,7 @@
         <div class="sec-head sec-head--center">
           <span class="eyebrow reveal">Three quick steps</span>
           <h2 class="h2 reveal" id="booking-title" style="--d:1">Book your <em class="grad-text">appointment.</em></h2>
-          <p class="lead reveal" style="--d:2">Pick a service, a day and a time. Your request goes straight to Mesha by text and she confirms personally. No app, no account, no middleman.</p>
+          <p class="lead reveal" style="--d:2">Pick a service, a day and a time. Mesha gets a ping with your request, and you&rsquo;ll hear back as soon as your appointment is confirmed. No app, no account, no middleman.</p>
         </div>
 
         <form class="book-grid" id="book-form" novalidate>
@@ -763,7 +765,7 @@
             </div>
 
             <div class="book-step">
-              <div class="step-head"><span class="step-num"><span>3</span><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg></span><h3>Your name</h3><span class="hint">So Mesha knows who&rsquo;s texting</span></div>
+              <div class="step-head"><span class="step-num"><span>3</span><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg></span><h3>Your name</h3><span class="hint">So Mesha knows who&rsquo;s booking</span></div>
               <div class="field">
                 <label class="sr-only" for="book-name">Your name</label>
                 <input class="input" id="book-name" name="name" type="text" autocomplete="name" placeholder="First and last name" />
@@ -784,14 +786,11 @@
               <a class="btn btn--light btn--block" id="book-send" href="sms:+13312333613" data-track="book_request" data-fb="Lead">
                 <svg class="icon"><use href="#i-message" /></svg> Request appointment
               </a>
-              <div class="summary-sub">
-                <button type="button" class="btn btn--outline-light btn--sm" id="book-copy"><svg class="icon"><use href="#i-copy" /></svg> Copy</button>
-                <a class="btn btn--outline-light btn--sm" href="tel:+13312333613" data-track="call_click" data-fb="Contact"><svg class="icon"><use href="#i-phone" /></svg> Call</a>
-              </div>
+              <a class="btn btn--outline-light btn--block btn--sm" href="tel:+13312333613" data-track="call_click" data-fb="Contact"><svg class="icon"><use href="#i-phone" /></svg> Prefer to call? (331) 233-3613</a>
             </div>
             <p class="summary-note">
-              Tapping <b>Request appointment</b> opens a text to Mesha at <b>(331) 233-3613</b> with everything
-              filled in. Just hit send. On a computer? Hit <b>Copy</b> and text it from your phone.
+              Mesha gets a ping with your request, and you&rsquo;ll hear back as soon as your appointment is
+              confirmed. After you tap <b>Request appointment</b>, just hit <b>send</b>.
             </p>
           </aside>
         </form>
@@ -938,7 +937,7 @@
             <span class="stars" aria-label="5 out of 5 stars">
               <svg class="icon icon--fill"><use href="#i-star" /></svg><svg class="icon icon--fill"><use href="#i-star" /></svg><svg class="icon icon--fill"><use href="#i-star" /></svg><svg class="icon icon--fill"><use href="#i-star" /></svg><svg class="icon icon--fill"><use href="#i-star" /></svg>
             </span>
-            <p>Average rating across <b>45+ verified client reviews</b>. Every one of them five stars.</p>
+            <p>Average rating across <b>45+ verified client reviews</b>.</p>
             <a href="#booking" class="btn btn--light btn--block" data-track="book_intent" data-label="reviews">Book an appointment <svg class="icon icon--arrow"><use href="#i-arrow" /></svg></a>
           </aside>
 
@@ -995,7 +994,7 @@
     <!-- ================= GIFT CERTIFICATES =================
          No preset denominations, by Mesha's request: the buyer types any
          amount. STRIPE — when checkout is live, point #gift-send at the
-         Stripe Payment Link / Checkout session instead of sms:. -->
+         Stripe Payment Link / Checkout session instead of the SMS request. -->
     <section class="section section--white" id="gift" aria-labelledby="gift-title">
       <div class="wrap gift-grid">
         <div>
@@ -1018,7 +1017,7 @@
             </div>
             <div class="gift-actions">
               <a class="btn btn--primary" id="gift-send" href="sms:+13312333613" data-track="gift_request" data-fb="Lead">
-                <svg class="icon"><use href="#i-gift" /></svg> Request by text
+                <svg class="icon"><use href="#i-gift" /></svg> Request gift certificate
               </a>
             </div>
             <p class="gift-note">Online checkout is coming soon. For now, send a request and Mesha will take it from there.</p>
@@ -1053,13 +1052,13 @@
           <span class="eyebrow reveal">Good to know</span>
           <h2 class="h2 reveal" id="faq-title" style="--d:1">Questions, <em class="grad-text">answered.</em></h2>
           <p class="lead reveal" style="--d:2">Anything else? Mesha answers her own phone.</p>
-          <a class="link-arrow reveal" style="--d:3" href="sms:+13312333613" data-track="text_click" data-fb="Contact">Text (331) 233-3613 <svg class="icon"><use href="#i-arrow" /></svg></a>
+          <a class="link-arrow reveal" style="--d:3" href="tel:+13312333613" data-track="call_click" data-fb="Contact">Call (331) 233-3613 <svg class="icon"><use href="#i-arrow" /></svg></a>
         </div>
 
         <div class="faq-list reveal">
           <details class="faq" name="faq">
             <summary>I&rsquo;m new to massage. Which service should I book? <span class="plus" aria-hidden="true"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <div class="faq-body"><p>A 60-minute Swedish Massage is a lovely place to start: smooth, gliding strokes with firm but gentle pressure. If you have a specific area of pain, the Rehab Therapy Massage is built for that. Still unsure? <a href="sms:+13312333613">Text Mesha</a> and she&rsquo;ll help you choose.</p></div>
+            <div class="faq-body"><p>A 60-minute Swedish Massage is a lovely place to start: smooth, gliding strokes with firm but gentle pressure. If you have a specific area of pain, the Rehab Therapy Massage is built for that. Still unsure? <a href="tel:+13312333613" data-track="call_click" data-fb="Contact">Call Mesha</a> and she&rsquo;ll help you choose.</p></div>
           </details>
           <details class="faq" name="faq">
             <summary>Is Essential Massage welcoming to everyone? <span class="plus" aria-hidden="true"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
@@ -1118,11 +1117,11 @@
               <svg class="lotus-bg" viewBox="0 0 160 126" aria-hidden="true"><use href="#lotus" fill="#fff" /></svg>
               <span class="label">Get in touch</span>
               <a class="phone" href="tel:+13312333613" data-track="call_click" data-fb="Contact">(331) 233-3613</a>
-              <p>Call or text. Mesha answers.</p>
+              <p>Questions before you book? Give Mesha a call.</p>
               <!-- TODO: add Mesha's email once we have it (not public, and we don't have it). -->
               <div class="row">
-                <a class="btn btn--light btn--sm" href="tel:+13312333613" data-track="call_click" data-fb="Contact"><svg class="icon"><use href="#i-phone" /></svg> Call</a>
-                <a class="btn btn--outline-light btn--sm" href="sms:+13312333613" data-track="text_click" data-fb="Contact"><svg class="icon"><use href="#i-message" /></svg> Text</a>
+                <a class="btn btn--light btn--sm" href="tel:+13312333613" data-track="call_click" data-fb="Contact"><svg class="icon"><use href="#i-phone" /></svg> Call Mesha</a>
+                <a class="btn btn--outline-light btn--sm" href="#booking" data-track="book_intent" data-label="contact card"><svg class="icon"><use href="#i-calendar" /></svg> Book online</a>
               </div>
             </div>
           </div>
@@ -1195,7 +1194,6 @@
           <h4>Contact</h4>
           <ul>
             <li><a href="tel:+13312333613" data-track="call_click" data-fb="Contact">(331) 233-3613</a></li>
-            <li><a href="sms:+13312333613" data-track="text_click" data-fb="Contact">Send a text</a></li>
             <li><a href="#booking">Book an appointment</a></li>
             <!-- TODO: add Instagram / Facebook links once Mesha confirms the exact URLs. -->
           </ul>
@@ -1215,7 +1213,6 @@
   <!-- ================= MOBILE ACTION BAR ================= -->
   <nav class="mbar" id="mbar" aria-label="Quick actions">
     <a class="m-soft" href="tel:+13312333613" data-track="call_click" data-fb="Contact"><svg class="icon"><use href="#i-phone" /></svg> Call</a>
-    <a class="m-soft" href="sms:+13312333613" data-track="text_click" data-fb="Contact"><svg class="icon"><use href="#i-message" /></svg> Text</a>
     <a class="m-book" href="#booking" data-track="book_intent" data-label="floating"><svg class="icon"><use href="#i-calendar" /></svg><span class="t-long">Book appointment</span><span class="t-short">Book</span></a>
   </nav>
 

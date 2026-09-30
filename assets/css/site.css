@@ -987,6 +987,7 @@ em.grad-text, .h1 em, .h2 em { font-style: italic; font-weight: 400; }
 .summary.flash { animation: flash 1.2s var(--ease); }
 @keyframes flash { 0% { box-shadow: 0 0 0 0 rgba(160, 150, 255, .7); } 100% { box-shadow: 0 0 0 18px rgba(160, 150, 255, 0); } }
 .summary-actions { display: grid; gap: 10px; }
+.summary-actions > .btn { white-space: normal; text-align: center; padding: 0 18px; min-width: 0; }
 .summary-actions > .btn--light { --h: 60px; font-size: 1.05rem; }
 .summary-sub { display: flex; gap: 10px; }
 .summary-sub > * { flex: 1; }
@@ -1207,7 +1208,7 @@ em.grad-text, .h1 em, .h2 em { font-style: italic; font-weight: 400; }
    --------------------------------------------------------------------- */
 .mbar {
   position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 90;
-  display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 8px; padding: 8px;
+  display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px; padding: 8px;
   border-radius: 22px; background: rgba(255, 255, 255, .9);
   -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5);
   border: 1px solid rgba(255, 255, 255, .95);

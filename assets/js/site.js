@@ -436,7 +436,7 @@
     calNext.addEventListener('click', () => { view.m++; if (view.m > 11) { view.m = 0; view.y++; } renderCalendar(); });
     form.addEventListener('submit', e => e.preventDefault());
 
-    copyBtn.addEventListener('click', async () => {
+    copyBtn?.addEventListener('click', async () => {
       const text = message();
       let ok = false;
       try { await navigator.clipboard.writeText(text); ok = true; } catch (_) {
@@ -505,7 +505,7 @@
       amount.setAttribute('aria-invalid', String(!valid));
       hint.classList.toggle('is-error', !valid);
       hint.textContent = valid ? 'Any amount from $10 to $2,000.'
-        : n < MIN ? 'The minimum is $10.' : 'The maximum online is $2,000. Text Mesha for larger amounts.';
+        : n < MIN ? 'The minimum is $10.' : 'The maximum online is $2,000. Call Mesha for larger amounts.';
 
       const who = forInput.value.trim();
       forPreview.textContent = who ? `For ${who}` : 'For someone special';
